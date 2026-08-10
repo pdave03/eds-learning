@@ -44,7 +44,7 @@ export default async function decorate(block) {
   if (social) {
     loadCSS(`${window.hlx.codeBasePath}/blocks/social-media/social-media.css`);
     social.classList.add('social-media-list');
-    decorateSocialLinks(social);
+    decorateSocialLinks(social, { variant: 'light' });
   }
 
   block.append(footer);

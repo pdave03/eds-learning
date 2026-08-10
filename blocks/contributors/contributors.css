@@ -118,17 +118,14 @@ main > .section.contributors-container .default-content-wrapper h2::after {
   color: #202020;
 }
 
-/* per-contributor social icons (light background, smaller, centred) */
+/* per-contributor social icons — dark band, centred under the card */
 .contributors .contributors-social {
-  margin-top: 14px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 .contributors .contributors-social .social-media-list {
-  --social-media-size: 32px;
-  --social-media-icon: 16px;
-  --social-media-color: #202020;
-  --social-media-border: rgb(32 32 32 / 25%);
-  --social-media-gap: 10px;
-
-  justify-content: center;
+  --social-media-size: 40px;
+  --social-media-icon: 17px;
 }

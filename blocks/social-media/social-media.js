@@ -47,9 +47,14 @@ function detectNetwork(anchor) {
  * Turn a set of social links (any container) into branded icon buttons.
  * Reusable by other blocks — keeps the original href, adds an accessible label.
  * @param {Element} container element holding the social <a> links
+ * @param {Object} [options]
+ * @param {'dark'|'light'} [options.variant='dark'] visual variant:
+ *   'dark' = black square buttons with white icons,
+ *   'light' = white band with black icons.
  * @returns {Element} the same container, decorated
  */
-export function decorateSocialLinks(container) {
+export function decorateSocialLinks(container, { variant = 'dark' } = {}) {
+  container.classList.add(`social-media-${variant === 'light' ? 'light' : 'dark'}`);
   container.querySelectorAll('a').forEach((anchor) => {
     const network = detectNetwork(anchor);
     const key = network ? network.key : 'link';
@@ -79,6 +84,9 @@ export default function decorate(block) {
   const anchors = [...block.querySelectorAll('a')];
   if (!anchors.length) return;
 
+  // variant from a block option/class (default dark)
+  const variant = block.classList.contains('light') ? 'light' : 'dark';
+
   const list = document.createElement('ul');
   list.className = 'social-media-list';
   anchors.forEach((anchor) => {
@@ -90,5 +98,5 @@ export default function decorate(block) {
   block.textContent = '';
   block.append(list);
 
-  decorateSocialLinks(block);
+  decorateSocialLinks(block, { variant });
 }

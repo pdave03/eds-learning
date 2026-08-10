@@ -47,7 +47,7 @@ export default function decorate(block) {
         item.append(a);
         list.append(item);
       });
-      decorateSocialLinks(list);
+      decorateSocialLinks(list, { variant: 'dark' });
       social.append(list);
       li.append(social);
     }
