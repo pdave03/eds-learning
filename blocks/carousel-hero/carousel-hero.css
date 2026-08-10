@@ -1,3 +1,10 @@
+/* Full-bleed hero: break out of the section's 1200px content width so the
+   image spans the full viewport on desktop and stays fluid on all devices. */
+main > .section > .carousel-hero-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
 .carousel-hero .carousel-hero-slides-container {
   position: relative;
 }
