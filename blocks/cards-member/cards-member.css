@@ -3,6 +3,38 @@
    Each members-only teaser is its own cards-member block, so the two blocks
    arrive as sibling .cards-member-wrapper elements in the section. Lay those
    wrappers out as a 2-up grid at >=600px. */
+
+/* "Members Only" heading — short yellow underline, matching "All Articles". */
+.section.cards-member-container .default-content-wrapper h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  color: #202020;
+  text-transform: none;
+}
+
+.section.cards-member-container .default-content-wrapper h2::after {
+  content: '';
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid #ffea00;
+}
+
+/* Grey partition line after the "Sign in…" intro paragraph. */
+.section.cards-member-container .default-content-wrapper {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+/* Locked cards are greyed out (member not signed in). The lock ribbon/padlock
+   stays full-strength to signal the locked state; only the card content
+   (title, description, CTA) and the image are dimmed. */
+.cards-member .cards-member-body > *,
+.cards-member .cards-member-image {
+  opacity: 0.5;
+  filter: grayscale(80%);
+}
+
 @media (width >= 600px) {
   main > .section.cards-member-container > .default-content-wrapper ~ .cards-member-wrapper {
     display: inline-block;
@@ -80,6 +112,7 @@
   padding-left: 34px; /* clear the lock ribbon */
 }
 
+/* stylelint-disable no-descending-specificity */
 .cards-member .cards-member-body h1,
 .cards-member .cards-member-body h2,
 .cards-member .cards-member-body h3 {
@@ -91,6 +124,7 @@
   text-transform: uppercase;
   color: #202020;
 }
+/* stylelint-enable no-descending-specificity */
 
 .cards-member .cards-member-body p {
   margin: 0 0 16px;
