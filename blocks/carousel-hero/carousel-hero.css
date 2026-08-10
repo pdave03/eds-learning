@@ -1,8 +1,15 @@
-/* Full-bleed hero: break out of the section's 1200px content width so the
-   image spans the full viewport on desktop and stays fluid on all devices. */
+/* Near full-bleed hero: break out of the section's 1200px content width so
+   the image spans (almost) the full viewport, with a small inset on both
+   sides for the whole block (image + controls). Stays fluid on all devices. */
 main > .section > .carousel-hero-wrapper {
   max-width: none;
-  padding: 0;
+  padding: 0 24px;
+}
+
+@media (width >= 900px) {
+  main > .section > .carousel-hero-wrapper {
+    padding: 0 48px;
+  }
 }
 
 .carousel-hero .carousel-hero-slides-container {
@@ -32,7 +39,7 @@ main > .section > .carousel-hero-wrapper {
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-end;
   position: relative;
   width: 100%;
@@ -50,16 +57,17 @@ main > .section > .carousel-hero-wrapper {
   object-fit: cover;
 }
 
-/* ---------- White content box, bottom-left, overlapping the image ---------- */
+/* ---------- White content box, centered, stuck to the bottom of the image ---------- */
 .carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
   z-index: 1;
   position: relative;
   box-sizing: border-box;
   width: calc(100% - 48px);
-  margin: 0 24px 48px;
+  margin: 0 auto;
   padding: 28px;
   background-color: #fff;
   color: #202020;
+  text-align: left;
 }
 
 .carousel-hero .carousel-hero-slide-content h1,
@@ -210,10 +218,8 @@ main > .section > .carousel-hero-wrapper {
 
 @media (width >= 900px) {
   .carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
-    width: calc((100% - 48px) * 0.62);
-    max-width: 780px;
-    margin-left: 92px;
-    margin-bottom: 40px;
+    width: min(62%, 780px);
+    margin: 0 auto;
     padding: 32px 40px;
   }
 

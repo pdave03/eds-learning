@@ -1,10 +1,22 @@
 /* WKND header — dark utility bar + white main bar */
 
+/* Sticky header: pin the whole header to the top on scroll. Applied to the
+   <header> element (its child .nav-wrapper alone cannot stay stuck because
+   <header> has a fixed height in global styles). height:auto lets the full
+   two-band header remain visible while pinned. */
+header:has(.nav-wrapper) {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: auto;
+}
+
 header .nav-wrapper {
   width: 100%;
   z-index: 3;
   position: relative;
   background-color: #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
