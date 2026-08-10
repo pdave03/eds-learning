@@ -1,40 +1,74 @@
 /*
- * columns-imgbottom: text content on top, full-width image at the bottom.
- * Distinct from the standard columns/columns-featured side-by-side layout:
- * this variant stays stacked (text then full-width image) at all breakpoints.
+ * columns-imgbottom: full-bleed image with a white content box (heading +
+ * description + CTA) overlapping the bottom of the image — the same visual
+ * treatment as a carousel-hero slide (see blocks/carousel-hero).
  */
 
-.columns-imgbottom > div {
+.columns-imgbottom .columns-imgbottom-stage {
+  position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: min(52vw, calc(100dvh - var(--nav-height)));
 }
 
-.columns-imgbottom img {
+/* full-bleed background image layer */
+.columns-imgbottom .columns-imgbottom-img-col {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.columns-imgbottom .columns-imgbottom-img-col picture,
+.columns-imgbottom .columns-imgbottom-img-col img {
   width: 100%;
+  height: 100%;
   display: block;
-}
-
-/* text column renders first */
-.columns-imgbottom > div > div {
-  order: 0;
-}
-
-/* image column renders last (bottom), full-bleed within the block */
-.columns-imgbottom > div > .columns-imgbottom-img-col {
-  order: 1;
-  margin-top: 24px;
-}
-
-.columns-imgbottom > div > .columns-imgbottom-img-col img {
-  display: block;
-  width: 100%;
   object-fit: cover;
 }
 
-/* CTA (e.g. "See Trip") — yellow, uppercase, rectangular to match other buttons */
-.columns-imgbottom > div > div > p > a:only-child {
+/* white content box, centered, stuck to the bottom of the image */
+.columns-imgbottom .columns-imgbottom-content-col {
+  z-index: 1;
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px;
+  background-color: #fff;
+  color: #202020;
+  text-align: left;
+}
+
+.columns-imgbottom .columns-imgbottom-content-col h1,
+.columns-imgbottom .columns-imgbottom-content-col h2,
+.columns-imgbottom .columns-imgbottom-content-col h3 {
+  margin: 0 0 12px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #202020;
+}
+
+.columns-imgbottom .columns-imgbottom-content-col p {
+  margin: 0 0 16px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #202020;
+}
+
+.columns-imgbottom .columns-imgbottom-content-col p:last-child {
+  margin-bottom: 0;
+}
+
+/* Yellow rectangular CTA ("See Trip") */
+.columns-imgbottom .columns-imgbottom-content-col a:any-link {
   display: inline-block;
-  margin-top: 8px;
+  margin-top: 4px;
   padding: 14px 35px;
   border: 0;
   border-radius: 0;
@@ -49,7 +83,25 @@
   transition: background-color 0.2s;
 }
 
-.columns-imgbottom > div > div > p > a:only-child:hover,
-.columns-imgbottom > div > div > p > a:only-child:focus-visible {
+.columns-imgbottom .columns-imgbottom-content-col a:hover,
+.columns-imgbottom .columns-imgbottom-content-col a:focus-visible {
   background-color: #e6d200;
+}
+
+@media (width >= 900px) {
+  .columns-imgbottom .columns-imgbottom-content-col {
+    width: min(62%, 780px);
+    padding: 32px 40px;
+  }
+
+  .columns-imgbottom .columns-imgbottom-content-col h1,
+  .columns-imgbottom .columns-imgbottom-content-col h2,
+  .columns-imgbottom .columns-imgbottom-content-col h3 {
+    font-size: 36px;
+  }
+
+  .columns-imgbottom .columns-imgbottom-content-col p {
+    font-size: 18px;
+    line-height: 1.75;
+  }
 }
