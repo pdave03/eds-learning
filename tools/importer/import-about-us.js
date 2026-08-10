@@ -124,27 +124,6 @@ export default {
     // 4. afterTransform cleanup + section breaks
     executeTransformers('afterTransform', main, payload);
 
-    // 4b. Append a page-level "Follow Us" social-media block section.
-    main.appendChild(document.createElement('hr'));
-    const followHeading = document.createElement('h2');
-    followHeading.textContent = 'Follow Us';
-    main.appendChild(followHeading);
-    const socialLinks = [
-      ['https://www.facebook.com/wknd', 'Facebook'],
-      ['https://www.twitter.com/wknd', 'Twitter'],
-      ['https://www.instagram.com/wknd', 'Instagram'],
-    ].map(([href, label]) => {
-      const a = document.createElement('a');
-      a.href = href;
-      a.textContent = label;
-      return [a];
-    });
-    const socialBlock = WebImporter.Blocks.createBlock(document, {
-      name: 'social-media',
-      cells: socialLinks,
-    });
-    main.appendChild(socialBlock);
-
     // 5. WebImporter built-in rules
     const hr = document.createElement('hr');
     main.appendChild(hr);

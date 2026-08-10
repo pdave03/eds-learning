@@ -27,6 +27,13 @@ main > .section.contributors-container::after {
   content: none;
 }
 
+/* the empty trailing section that follows the contributors section must not
+   draw the global pre-footer partition line either (About Us ends on the
+   contributor grid — no divider before the footer) */
+main > .section.contributors-container + .section:last-child::after {
+  content: none;
+}
+
 /* section headings / intros span the full row (break the flow between groups) */
 main > .section.contributors-container > .default-content-wrapper {
   flex: 0 0 100%;
