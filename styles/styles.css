@@ -278,6 +278,32 @@ button.button.accent:disabled:focus-visible {
   color: var(--dark-color);
 }
 
+/* WKND CTA buttons — standalone default-content links (e.g. "All Articles",
+   "All Trips") render as a yellow, uppercase, rectangular button to match the
+   block CTAs (View Trips, Full Article, See Trip) across the whole page. */
+main .default-content-wrapper p:not(.button-wrapper) > a:only-child {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: #ffea00;
+  color: #202020;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+main .default-content-wrapper p:not(.button-wrapper) > a:only-child:hover,
+main .default-content-wrapper p:not(.button-wrapper) > a:only-child:focus-visible {
+  background-color: #e6d200;
+  color: #202020;
+}
+
 main img {
   max-width: 100%;
   width: auto;
