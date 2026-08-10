@@ -152,6 +152,37 @@
           ]
         }
       ]
+    },
+    {
+      "name": "about-us",
+      "urls": [
+        "https://wknd.site/us/en/about-us.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND About Us page: About Us title, and two contributor sections (Our Contributors, WKND Guides) each with an intro paragraph and a grid of contributor cards (circular photo + name + title). Uses a custom contributors block.",
+      "blocks": [
+        {
+          "name": "contributors",
+          "instances": [
+            "div.cmp-container:has(> div.image):has(> div.title)"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Our Contributors",
+          "selector": "div.cmp-container:has(> div.image):has(> div.title)",
+          "style": null,
+          "blocks": [
+            "contributors"
+          ],
+          "defaultContent": [
+            "h1",
+            "div.title.cmp-title--underline"
+          ]
+        }
+      ]
     }
   ]
 }
