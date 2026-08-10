@@ -119,6 +119,41 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
+/* ---------- Unified typography (WKND) ----------
+   Every heading, sub-heading and paragraph across the page uses one of three
+   type styles, matching the "Recent Articles" reference. Colors are left to
+   each context (light on the dark footer, dark in main content). */
+
+/* Title: h1 / h2 — serif, 36px */
+h1,
+h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+/* Sub-heading: h3–h6 — Source Sans, 18px, uppercase */
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* Paragraph — Source Sans, 14px */
+p {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 p,
 dl,
 ol,

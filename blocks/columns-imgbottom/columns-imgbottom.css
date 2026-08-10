@@ -63,18 +63,11 @@ main > .section > .columns-imgbottom-wrapper {
 .columns-imgbottom .columns-imgbottom-content-col h2,
 .columns-imgbottom .columns-imgbottom-content-col h3 {
   margin: 0 0 12px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 1.2;
   color: #202020;
 }
 
 .columns-imgbottom .columns-imgbottom-content-col p {
   margin: 0 0 16px;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
   color: #202020;
 }
 
@@ -115,16 +108,5 @@ main > .section > .columns-imgbottom-wrapper {
   .columns-imgbottom .columns-imgbottom-content-col {
     width: min(62%, 780px);
     padding: 32px 40px;
-  }
-
-  .columns-imgbottom .columns-imgbottom-content-col h1,
-  .columns-imgbottom .columns-imgbottom-content-col h2,
-  .columns-imgbottom .columns-imgbottom-content-col h3 {
-    font-size: 36px;
-  }
-
-  .columns-imgbottom .columns-imgbottom-content-col p {
-    font-size: 18px;
-    line-height: 1.75;
   }
 }
