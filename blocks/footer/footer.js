@@ -9,8 +9,9 @@ export default async function decorate(block) {
   // load footer as fragment — dual-fetch: localhost content path first, then EDS/DA path
   const footerMeta = getMetadata('footer');
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  let fragment = await loadFragment('/content/footer');
-  if (!fragment) fragment = await loadFragment(footerPath);
+  let loadedFooterPath = '/content/footer';
+  let fragment = await loadFragment(loadedFooterPath);
+  if (!fragment) { loadedFooterPath = footerPath; fragment = await loadFragment(footerPath); }
   if (!fragment) return;
 
   // decorate footer DOM
@@ -18,8 +19,9 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
-  // Rebase relative footer images against the footer fragment location (/content/)
-  const footerBase = new URL('/content/footer', window.location);
+  // Rebase relative footer images against the footer fragment location that loaded,
+  // so they resolve in both local (/content) and production (DA root).
+  const footerBase = new URL(loadedFooterPath, window.location);
   footer.querySelectorAll('img[src]').forEach((img) => {
     const src = img.getAttribute('src');
     if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('data:')) {

@@ -57,8 +57,9 @@ export default async function decorate(block) {
   // load nav as fragment — dual-fetch: localhost content path first, then EDS/DA path
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  let fragment = await loadFragment('/content/nav');
-  if (!fragment) fragment = await loadFragment(navPath);
+  let loadedNavPath = '/content/nav';
+  let fragment = await loadFragment(loadedNavPath);
+  if (!fragment) { loadedNavPath = navPath; fragment = await loadFragment(navPath); }
   if (!fragment) return;
 
   // decorate nav DOM
@@ -68,8 +69,8 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
   // Rebase relative nav images (e.g. images/logo.svg) against the nav fragment
-  // location (/content/) so they resolve regardless of the current page URL.
-  const navBase = new URL('/content/nav', window.location);
+  // location that actually loaded, so they resolve in both local (/content) and prod.
+  const navBase = new URL(loadedNavPath, window.location);
   nav.querySelectorAll('img[src]').forEach((img) => {
     const src = img.getAttribute('src');
     if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('data:')) {
