@@ -47,7 +47,8 @@ main > .section.cards-member-container::after {
   main > .section.cards-member-container > .default-content-wrapper ~ .cards-member-wrapper {
     display: inline-block;
     box-sizing: border-box;
-    width: calc(50% - 12px);
+    height: 250px;
+    width: 250px;
     vertical-align: top;
   }
 
@@ -181,8 +182,3 @@ main > .section.cards-member-container::after {
   display: block;
 }
 
-@media (width >= 600px) {
-  .cards-member > ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
