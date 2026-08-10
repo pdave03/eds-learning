@@ -1,0 +1,32 @@
+/*
+ * columns-imgbottom: text content on top, full-width image at the bottom.
+ * Distinct from the standard columns/columns-featured side-by-side layout:
+ * this variant stays stacked (text then full-width image) at all breakpoints.
+ */
+
+.columns-imgbottom > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-imgbottom img {
+  width: 100%;
+  display: block;
+}
+
+/* text column renders first */
+.columns-imgbottom > div > div {
+  order: 0;
+}
+
+/* image column renders last (bottom), full-bleed within the block */
+.columns-imgbottom > div > .columns-imgbottom-img-col {
+  order: 1;
+  margin-top: 24px;
+}
+
+.columns-imgbottom > div > .columns-imgbottom-img-col img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}

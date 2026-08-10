@@ -1,20 +1,125 @@
+/* WKND footer — dark background, light text */
+
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #202020;
+  color: #ebebeb;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-footer .footer > div {
+footer .footer {
   margin: auto;
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  padding: 16px 24px 24px;
+  display: grid;
+  grid-template-areas:
+    'brand'
+    'nav'
+    'social'
+    'legal';
+  gap: 16px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+footer .footer a:any-link {
+  color: #ebebeb;
+  text-decoration: none;
+}
+
+footer .footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+footer .footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* brand / logo */
+footer .footer-brand {
+  grid-area: brand;
+}
+
+footer .footer-brand img {
+  width: 128px;
+  height: auto;
+  display: block;
+}
+
+/* footer nav */
+footer .footer-nav {
+  grid-area: nav;
+}
+
+footer .footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer-nav a {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* social */
+footer .footer-social {
+  grid-area: social;
+}
+
+footer .footer-social h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ebebeb;
+}
+
+footer .footer-social ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer-social a {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* legal / copyright */
+footer .footer-legal {
+  grid-area: legal;
+  padding-top: 16px;
+  border-top: 1px solid rgb(235 235 235 / 20%);
+  font-size: 12px;
+  color: #f7f7f7;
+  line-height: 1.5;
+}
+
+footer .footer-legal p + p {
+  margin-top: 12px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer-legal a {
+  text-decoration: underline;
+}
+
+/* ---------- Desktop (>= 900px) ---------- */
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer {
+    padding: 16px 32px 24px;
+    grid-template-areas:
+      'brand nav social'
+      'legal legal legal';
+    grid-template-columns: auto 1fr auto;
+    column-gap: 48px;
+    align-items: start;
   }
 }

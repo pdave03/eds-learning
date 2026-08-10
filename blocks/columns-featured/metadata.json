@@ -1,0 +1,41 @@
+{
+  "variantName": "columns-featured",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-08-10T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en.html",
+    "originPage": "WKND homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "grey",
+    "density": "wide",
+    "purpose": "feature",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + eyebrow + heading + description + CTA",
+    "buttonCount": 1,
+    "imageCount": 1,
+    "columns": 2,
+    "arrangement": "image left, text right (stacks on mobile)"
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "featured article promos with image beside text",
+      "two-column image + text content sections",
+      "side-by-side promo blocks with a single CTA"
+    ],
+    "notSuitableFor": [
+      "grids of repeating items (use cards)",
+      "text-only side-by-side comparisons",
+      "layouts where the image should sit below the text (use columns-imgbottom)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T00:00:00.000Z"
+  }
+}
