@@ -384,3 +384,28 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* Partition line — thin light rule at content width. Placed before the
+   "Next Adventures" section and before the footer. */
+main > .section.columns-imgbottom-container::before,
+footer::before {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  border-top: 1px solid #e6e6e6;
+}
+
+/* space the divider from the content on either side */
+main > .section.columns-imgbottom-container::before {
+  margin-bottom: 40px;
+}
+
+@media (width >= 900px) {
+  main > .section.columns-imgbottom-container::before,
+  footer::before {
+    padding: 0 32px;
+  }
+}
