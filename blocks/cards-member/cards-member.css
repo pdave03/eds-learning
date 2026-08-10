@@ -20,10 +20,18 @@
   border-bottom: 2px solid #ffea00;
 }
 
-/* Grey partition line after the "Sign in…" intro paragraph. */
+/* Grey partition line after the "Sign in…" intro paragraph. Spacing below the
+   line keeps it clear of the cards / lock ribbons (no overlap). */
 .section.cards-member-container .default-content-wrapper {
-  padding-bottom: 40px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
   border-bottom: 1px solid #e6e6e6;
+}
+
+/* No pre-footer partition line for this section — the Members Only divider
+   above already separates it; a second line after the cards is redundant. */
+main > .section.cards-member-container::after {
+  content: none;
 }
 
 /* Locked cards are greyed out (member not signed in). The lock ribbon/padlock
@@ -134,9 +142,13 @@
   color: #696969;
 }
 
-/* gray "Read More" button */
-.cards-member .cards-member-cta:any-link {
+/* gray "Read More" button — both the linked CTA and the static (gated,
+   plain-text) "Read More" render as the same grey button. */
+.cards-member .cards-member-cta:any-link,
+.cards-member p.cards-member-cta-static {
   display: inline-block;
+  width: auto;
+  margin: 0;
   padding: 7px 14px;
   border: 0;
   border-radius: 0;

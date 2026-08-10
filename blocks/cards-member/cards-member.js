@@ -17,11 +17,20 @@ export default function decorate(block) {
     const imageCell = cells.find((c) => c.querySelector('picture'));
     const bodyCell = cells.find((c) => c !== imageCell) || cells[0];
 
-    // Body: title + description + optional Read More.
+    // Body: title + description + "Read More".
     if (bodyCell) {
       bodyCell.className = 'cards-member-body';
+      // The CTA is a link when available, otherwise the last (plain-text)
+      // paragraph — the gated "Read More". Style either as the grey button.
       const link = bodyCell.querySelector('a');
-      if (link) link.classList.add('cards-member-cta');
+      if (link) {
+        link.classList.add('cards-member-cta');
+      } else {
+        const last = bodyCell.querySelector('p:last-of-type');
+        if (last && /read more/i.test(last.textContent)) {
+          last.classList.add('cards-member-cta', 'cards-member-cta-static');
+        }
+      }
       li.append(bodyCell);
     }
 
