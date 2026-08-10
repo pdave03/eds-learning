@@ -105,22 +105,26 @@ export default async function decorate(block) {
   block.prepend(slidesWrapper);
 
   let slideIndicators;
+  let controls;
   if (!isSingleSlide) {
+    // A single controls row sits BELOW the image: dots centered, arrows bottom-right.
+    controls = document.createElement('div');
+    controls.classList.add('carousel-hero-controls');
+
     const slideIndicatorsNav = document.createElement('nav');
     slideIndicatorsNav.setAttribute('aria-label', 'Carousel Slide Controls');
     slideIndicators = document.createElement('ol');
     slideIndicators.classList.add('carousel-hero-slide-indicators');
     slideIndicatorsNav.append(slideIndicators);
-    block.append(slideIndicatorsNav);
+    controls.append(slideIndicatorsNav);
 
     const slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('carousel-hero-navigation-buttons');
     slideNavButtons.innerHTML = `
-      <button type="button" class= "slide-prev" aria-label="Previous Slide"></button>
+      <button type="button" class="slide-prev" aria-label="Previous Slide"></button>
       <button type="button" class="slide-next" aria-label="Next Slide"></button>
     `;
-
-    container.append(slideNavButtons);
+    controls.append(slideNavButtons);
   }
 
   rows.forEach((row, idx) => {
@@ -141,6 +145,7 @@ export default async function decorate(block) {
   block.prepend(container);
 
   if (!isSingleSlide) {
+    block.append(controls);
     bindEvents(block);
   }
 }
