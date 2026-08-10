@@ -48,29 +48,59 @@ const TransformHook = {
 };
 
 /**
- * Resolve the first content element of a section, in document/reading order,
- * using parse-stable anchors specific to the WKND homepage template.
- * @returns {Element|null} boundary element, or null when there is no break
- *   (section 1) or the anchor is not present on the page.
+ * WKND homepage: its content is grouped into two `main.cmp-layout-container--fixed`
+ * wrappers that don't line up with the 4 logical sections, and block selectors
+ * are replaced by parsers before this hook runs. So the homepage boundaries are
+ * resolved to hand-picked, parse-stable anchors (see the file header). This map
+ * is keyed by the homepage template name only.
  */
-function findSectionStart(element, section, underlineTitles) {
+function findHomepageSectionStart(element, section, underlineTitles) {
   switch (section.id) {
     case 'section-1':
-      // Hero Carousel — first section, no break before it.
-      return null;
+      return null; // Hero Carousel — first section, no break before it.
     case 'section-2':
-      // Featured Article — first fixed layout container survives parsing and is
-      // the content-grid sibling immediately after the hero carousel.
+      // Featured Article — first fixed layout container (survives parsing).
       return element.querySelector('main.cmp-layout-container--fixed');
     case 'section-3':
-      // Recent Articles — first underlined section title (default content).
-      return underlineTitles[0] || null;
+      return underlineTitles[0] || null; // Recent Articles — 1st underline title.
     case 'section-4':
-      // Next Adventures — second underlined section title (default content).
-      return underlineTitles[1] || null;
+      return underlineTitles[1] || null; // Next Adventures — 2nd underline title.
     default:
       return null;
   }
+}
+
+/**
+ * Generic resolver for other WKND pages (e.g. magazine): anchor each section
+ * break to the first surviving element it can find, in this order:
+ *   1. the section's first default-content selector (headings/titles survive
+ *      parsing and are the natural section start), then
+ *   2. the section `selector` itself.
+ * Block selectors (e.g. div.teaser.cmp-teaser--*) are NOT used as anchors here
+ * because parsers replace them with tables before afterTransform runs.
+ * @returns {Element|null}
+ */
+function findGenericSectionStart(element, section, index, usedAnchors) {
+  if (index === 0) return null; // first section — no break before it.
+
+  const trySelectors = [];
+  if (Array.isArray(section.defaultContent)) trySelectors.push(...section.defaultContent);
+  if (typeof section.selector === 'string') trySelectors.push(section.selector);
+  else if (Array.isArray(section.selector)) trySelectors.push(...section.selector);
+
+  // For each selector, pick the FIRST matching element not already claimed by an
+  // earlier section. This lets repeated selectors (e.g. two
+  // div.title.cmp-title--underline titles) resolve to distinct anchors in
+  // document order, so each section gets its own break point.
+  for (let i = 0; i < trySelectors.length; i += 1) {
+    const matches = Array.from(element.querySelectorAll(trySelectors[i]));
+    const el = matches.find((m) => m.parentNode && !usedAnchors.has(m));
+    if (el) {
+      usedAnchors.add(el);
+      return el;
+    }
+  }
+  return null;
 }
 
 export default function transform(hookName, element, payload) {
@@ -80,18 +110,30 @@ export default function transform(hookName, element, payload) {
     if (!sections || !Array.isArray(sections) || sections.length < 2) return;
 
     const { document } = payload;
+    const isHomepage = template.name === 'homepage';
 
-    // The two underlined section titles ("Recent Articles", "Next Adventures")
-    // in document order. Default content, so they survive block parsing.
+    // The underlined section titles in document order. Default content, so they
+    // survive block parsing (used by the homepage-specific anchor resolver).
     const underlineTitles = Array.from(
       element.querySelectorAll('div.title.cmp-title--underline'),
     );
 
-    // Process sections in reverse document order so inserting a break for a
-    // later section never shifts the anchor of an earlier one.
-    for (let i = sections.length - 1; i >= 0; i -= 1) {
-      const section = sections[i];
-      const start = findSectionStart(element, section, underlineTitles);
+    // Pass 1: resolve each section's anchor in FORWARD document order. The
+    // generic resolver claims anchors so repeated selectors map to distinct
+    // elements; the homepage resolver uses fixed, order-independent anchors.
+    const usedAnchors = new Set();
+    const resolved = sections.map((section, i) => ({
+      section,
+      index: i,
+      start: isHomepage
+        ? findHomepageSectionStart(element, section, underlineTitles)
+        : findGenericSectionStart(element, section, i, usedAnchors),
+    }));
+
+    // Pass 2: insert breaks/metadata in REVERSE order so inserting a node for a
+    // later section never shifts the resolved anchor of an earlier one.
+    for (let i = resolved.length - 1; i >= 0; i -= 1) {
+      const { section, index, start } = resolved[i];
       if (!start || !start.parentNode) continue;
 
       // Section Metadata — only when the template section defines a style.
@@ -105,7 +147,7 @@ export default function transform(hookName, element, payload) {
       }
 
       // Section break before every section except the first.
-      if (i > 0) {
+      if (index > 0) {
         const hr = document.createElement('hr');
         start.parentNode.insertBefore(hr, start);
       }

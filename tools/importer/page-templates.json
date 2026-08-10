@@ -85,6 +85,74 @@
           ]
         }
       ]
+    },
+    {
+      "name": "magazine",
+      "urls": [
+        "https://wknd.site/us/en/magazine.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND Magazine page: Magazine title, featured article (image+text), All Articles cards grid, Members Only heading, and two members-only promo teasers (text + image). Reuses homepage blocks.",
+      "blocks": [
+        {
+          "name": "columns-featured",
+          "instances": [
+            "div.teaser.cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "div.image-list.list"
+          ]
+        },
+        {
+          "name": "columns-imgbottom",
+          "instances": [
+            "div.teaser.cmp-teaser--imagebottom",
+            "div.teaser.cmp-teaser--secure"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Featured Article",
+          "selector": "div.teaser.cmp-teaser--featured",
+          "style": null,
+          "blocks": [
+            "columns-featured"
+          ],
+          "defaultContent": [
+            "h1"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "All Articles",
+          "selector": "div.image-list.list",
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            "div.title.cmp-title--underline"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "Members Only",
+          "selector": "div.teaser.cmp-teaser--secure",
+          "style": null,
+          "blocks": [
+            "columns-imgbottom"
+          ],
+          "defaultContent": [
+            "div.title.cmp-title--underline",
+            "div.text"
+          ]
+        }
+      ]
     }
   ]
 }
