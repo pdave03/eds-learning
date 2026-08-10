@@ -48,7 +48,11 @@ export default function parse(element, { document }) {
     const link = document.createElement('a');
     link.href = href;
     link.textContent = label;
-    socialCell.push(link);
+    // Wrap each link in its own paragraph so Document Authoring keeps the
+    // anchors distinct (adjacent inline anchors get merged into one otherwise).
+    const p = document.createElement('p');
+    p.append(link);
+    socialCell.push(p);
   });
 
   // Empty-block guard.
