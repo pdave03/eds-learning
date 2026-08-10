@@ -117,3 +117,18 @@ main > .section.contributors-container .default-content-wrapper h2::after {
   text-transform: uppercase;
   color: #202020;
 }
+
+/* per-contributor social icons (light background, smaller, centred) */
+.contributors .contributors-social {
+  margin-top: 14px;
+}
+
+.contributors .contributors-social .social-media-list {
+  --social-media-size: 32px;
+  --social-media-icon: 16px;
+  --social-media-color: #202020;
+  --social-media-border: rgb(32 32 32 / 25%);
+  --social-media-gap: 10px;
+
+  justify-content: center;
+}

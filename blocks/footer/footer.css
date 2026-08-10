@@ -80,17 +80,7 @@ footer .footer-social h4 {
   color: #ebebeb;
 }
 
-footer .footer-social ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-/* stylelint-disable-next-line no-descending-specificity */
-footer .footer-social a {
-  font-size: 14px;
-  text-transform: uppercase;
-}
+/* social icon links are styled by the reusable social-media block */
 
 /* legal / copyright */
 footer .footer-legal {

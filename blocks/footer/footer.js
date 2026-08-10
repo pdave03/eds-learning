@@ -1,5 +1,6 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, loadCSS } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { decorateSocialLinks } from '../social-media/social-media.js';
 
 /**
  * loads and decorates the footer
@@ -35,6 +36,16 @@ export default async function decorate(block) {
     const section = footer.children[i];
     if (section) section.classList.add(`footer-${c}`);
   });
+
+  // Reuse the social-media block to turn the "Follow Us" links into icons.
+  // The social-media CSS is only auto-loaded when a `.social-media` block is
+  // decorated, so load it explicitly here since we reuse only the function.
+  const social = footer.querySelector('.footer-social ul');
+  if (social) {
+    loadCSS(`${window.hlx.codeBasePath}/blocks/social-media/social-media.css`);
+    social.classList.add('social-media-list');
+    decorateSocialLinks(social);
+  }
 
   block.append(footer);
 }

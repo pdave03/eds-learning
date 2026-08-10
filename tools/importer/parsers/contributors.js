@@ -3,15 +3,15 @@
 /**
  * Parser for contributors. Custom block (About Us page).
  * Source: https://wknd.site/us/en/about-us.html
- * Generated: 2026-08-10
  *
  * Each contributor is a WKND layout container holding an image + two titles
- * (name h3, role h5) + a social nav. Per the requirement, the block keeps only
- * the photo, name and title (social bar omitted).
+ * (name h3, role h5) + a list of social-media button links.
  *
- * One block row with two cells:
+ * One block row with three cells:
  *  - Cell 1: the contributor photo.
  *  - Cell 2: name (heading) + title/role (heading).
+ *  - Cell 3: social links (facebook/twitter/instagram) — rendered by the
+ *    contributors block via the reusable social-media block.
  * Each contributor is its own single-item block; contributors.css lays the
  * consecutive blocks out as a responsive grid within the section.
  */
@@ -36,13 +36,32 @@ export default function parse(element, { document }) {
     textCell.push(p);
   }
 
+  // Social links: WKND renders them as .cmp-button anchors with a network label.
+  // Preserve each anchor's visible text verbatim so nothing is dropped; the
+  // reusable social-media block detects the network from the href/text.
+  const socialCell = [];
+  const socialAnchors = [...element.querySelectorAll('a.cmp-button, .cmp-button--icononly a, .buildingblock a')];
+  socialAnchors.forEach((a) => {
+    const label = (a.textContent || a.getAttribute('aria-label') || '').trim();
+    const href = a.getAttribute('href') || '#';
+    if (!label) return;
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = label;
+    socialCell.push(link);
+  });
+
   // Empty-block guard.
   if (!img && !textCell.length) {
     element.replaceWith(...element.childNodes);
     return;
   }
 
-  const cells = [[img || '', textCell.length ? textCell : '']];
+  const cells = [[
+    img || '',
+    textCell.length ? textCell : '',
+    socialCell.length ? socialCell : '',
+  ]];
 
   const block = WebImporter.Blocks.createBlock(document, { name: 'contributors', cells });
   element.replaceWith(block);

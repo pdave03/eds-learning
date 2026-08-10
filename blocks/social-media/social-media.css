@@ -1,0 +1,71 @@
+/* Social Media block — reusable icon buttons.
+   Core styling keys off the block's own prefixed classes (.social-media-list /
+   .social-media-link) rather than the .social-media block ancestor, so the same
+   look applies whether the block is authored on a page OR reused by another
+   block (e.g. the footer) that only calls decorateSocialLinks().
+   Custom properties let any host theme size/colours. */
+.social-media,
+.social-media-list {
+  --social-media-size: 40px;
+  --social-media-icon: 20px;
+  --social-media-color: currentcolor;
+  --social-media-bg: transparent;
+  --social-media-border: currentcolor;
+  --social-media-hover-color: #202020;
+  --social-media-hover-bg: #ffea00;
+  --social-media-hover-border: #ffea00;
+  --social-media-gap: 16px;
+}
+
+ul.social-media-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--social-media-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.social-media-list li {
+  margin: 0;
+  padding: 0;
+}
+
+a.social-media-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--social-media-size);
+  height: var(--social-media-size);
+  padding: 0;
+  border: 1px solid var(--social-media-border);
+  border-radius: 50%;
+  color: var(--social-media-color);
+  background-color: var(--social-media-bg);
+  font-size: 0; /* hide any residual text label */
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+a.social-media-link svg {
+  width: var(--social-media-icon);
+  height: var(--social-media-icon);
+  fill: currentcolor;
+  display: block;
+}
+
+a.social-media-link:hover,
+a.social-media-link:focus-visible {
+  color: var(--social-media-hover-color);
+  background-color: var(--social-media-hover-bg);
+  border-color: var(--social-media-hover-border);
+}
+
+/* ---- Footer usage: darker theme, slightly smaller icons ---- */
+footer .footer-social ul.social-media-list {
+  --social-media-size: 36px;
+  --social-media-icon: 18px;
+  --social-media-color: #ebebeb;
+  --social-media-border: rgb(235 235 235 / 40%);
+  --social-media-gap: 12px;
+}

@@ -166,6 +166,10 @@
           "instances": [
             "div.cmp-container:has(> div.image):has(> div.title)"
           ]
+        },
+        {
+          "name": "social-media",
+          "instances": []
         }
       ],
       "sections": [
