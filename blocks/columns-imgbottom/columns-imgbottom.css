@@ -4,13 +4,30 @@
  * treatment as a carousel-hero slide (see blocks/carousel-hero).
  */
 
+/* Full-bleed: break out of the section's 1200px content width so the image
+   spans (almost) the full viewport, with a small side inset like the carousel. */
+main > .section > .columns-imgbottom-wrapper {
+  max-width: none;
+  padding: 0 24px;
+}
+
+@media (width >= 900px) {
+  main > .section > .columns-imgbottom-wrapper {
+    padding: 0 48px;
+  }
+}
+
 .columns-imgbottom .columns-imgbottom-stage {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  min-height: min(52vw, calc(100dvh - var(--nav-height)));
+  width: 100%;
+
+  /* taller on small screens so the image reads well; desktop uses the
+     1680 x 640 banner proportion below */
+  min-height: min(90vw, 60vh);
 }
 
 /* full-bleed background image layer */
@@ -89,6 +106,12 @@
 }
 
 @media (width >= 900px) {
+  .columns-imgbottom .columns-imgbottom-stage {
+    /* 1680 x 640 banner proportion (~2.625:1) */
+    min-height: 0;
+    aspect-ratio: 1680 / 640;
+  }
+
   .columns-imgbottom .columns-imgbottom-content-col {
     width: min(62%, 780px);
     padding: 32px 40px;
