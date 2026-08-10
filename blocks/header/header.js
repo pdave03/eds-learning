@@ -176,4 +176,13 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // Shrink the header into a compact state once the page is scrolled.
+  // The CSS transitions animate the size change; JS only toggles the class.
+  const header = block.closest('header') || block;
+  const onScroll = () => {
+    header.classList.toggle('header-compact', window.scrollY > 40);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
