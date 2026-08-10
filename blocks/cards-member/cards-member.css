@@ -1,0 +1,142 @@
+/* WKND Members Only cards — 2-up grid, each card locked with a yellow ribbon,
+   text content, a gray "Read More" button, and the image below.
+   Each members-only teaser is its own cards-member block, so the two blocks
+   arrive as sibling .cards-member-wrapper elements in the section. Lay those
+   wrappers out as a 2-up grid at >=600px. */
+@media (width >= 600px) {
+  main > .section.cards-member-container > .default-content-wrapper ~ .cards-member-wrapper {
+    display: inline-block;
+    box-sizing: border-box;
+    width: calc(50% - 12px);
+    vertical-align: top;
+  }
+
+  main > .section.cards-member-container
+    > .cards-member-wrapper:not(:last-of-type) {
+    margin-right: 20px;
+  }
+}
+
+.cards-member > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px 24px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.cards-member > ul > li {
+  position: relative;
+  border: 0;
+  background-color: transparent;
+}
+
+/* ---------- Lock ribbon (yellow corner + padlock) ---------- */
+.cards-member > ul > li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 44px solid #ffea00;
+  border-right: 44px solid transparent;
+  z-index: 1;
+}
+
+/* padlock body drawn in CSS (reliable across fonts) */
+.cards-member > ul > li::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 6px;
+  width: 11px;
+  height: 8px;
+  box-sizing: border-box;
+  border: 2px solid #202020;
+  border-radius: 0 0 2px 2px;
+  z-index: 2;
+}
+
+/* padlock shackle */
+.cards-member .cards-member-body::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 8.5px;
+  width: 6px;
+  height: 6px;
+  box-sizing: border-box;
+  border: 2px solid #202020;
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  z-index: 2;
+}
+
+/* ---------- Body (title, description, CTA) ---------- */
+.cards-member .cards-member-body {
+  padding-left: 34px; /* clear the lock ribbon */
+}
+
+.cards-member .cards-member-body h1,
+.cards-member .cards-member-body h2,
+.cards-member .cards-member-body h3 {
+  margin: 0 0 8px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: #202020;
+}
+
+.cards-member .cards-member-body p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #696969;
+}
+
+/* gray "Read More" button */
+.cards-member .cards-member-cta:any-link {
+  display: inline-block;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 0;
+  background-color: #ebebeb;
+  color: #696969;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cards-member .cards-member-cta:hover,
+.cards-member .cards-member-cta:focus-visible {
+  background-color: #dcdcdc;
+  color: #202020;
+}
+
+/* ---------- Image below ---------- */
+.cards-member .cards-member-image {
+  margin-top: 24px;
+  line-height: 0;
+}
+
+.cards-member .cards-member-image img {
+  width: 100%;
+  aspect-ratio: 360 / 200;
+  object-fit: cover;
+  display: block;
+}
+
+@media (width >= 600px) {
+  .cards-member > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

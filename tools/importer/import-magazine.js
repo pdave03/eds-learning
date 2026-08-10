@@ -4,7 +4,7 @@
 // PARSER IMPORTS
 import columnsFeaturedParser from './parsers/columns-featured.js';
 import cardsArticleParser from './parsers/cards-article.js';
-import columnsImgbottomParser from './parsers/columns-imgbottom.js';
+import cardsMemberParser from './parsers/cards-member.js';
 
 // TRANSFORMER IMPORTS
 import cleanupTransformer from './transformers/wknd-cleanup.js';
@@ -14,7 +14,7 @@ import sectionsTransformer from './transformers/wknd-sections.js';
 const parsers = {
   'columns-featured': columnsFeaturedParser,
   'cards-article': cardsArticleParser,
-  'columns-imgbottom': columnsImgbottomParser,
+  'cards-member': cardsMemberParser,
 };
 
 // PAGE TEMPLATE CONFIGURATION - Embedded from page-templates.json (magazine)
@@ -34,8 +34,8 @@ const PAGE_TEMPLATE = {
       instances: ['div.image-list.list'],
     },
     {
-      name: 'columns-imgbottom',
-      instances: ['div.teaser.cmp-teaser--imagebottom', 'div.teaser.cmp-teaser--secure'],
+      name: 'cards-member',
+      instances: ['div.teaser.cmp-teaser--secure'],
     },
   ],
   sections: [
@@ -60,7 +60,7 @@ const PAGE_TEMPLATE = {
       name: 'Members Only',
       selector: 'div.teaser.cmp-teaser--secure',
       style: null,
-      blocks: ['columns-imgbottom'],
+      blocks: ['cards-member'],
       defaultContent: ['div.title.cmp-title--underline', 'div.text'],
     },
   ],

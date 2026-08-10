@@ -107,9 +107,8 @@
           ]
         },
         {
-          "name": "columns-imgbottom",
+          "name": "cards-member",
           "instances": [
-            "div.teaser.cmp-teaser--imagebottom",
             "div.teaser.cmp-teaser--secure"
           ]
         }
@@ -145,7 +144,7 @@
           "selector": "div.teaser.cmp-teaser--secure",
           "style": null,
           "blocks": [
-            "columns-imgbottom"
+            "cards-member"
           ],
           "defaultContent": [
             "div.title.cmp-title--underline",
