@@ -20,6 +20,23 @@
   border-bottom: 2px solid #ffea00;
 }
 
+/* Center the whole Members Only section content (heading + intro + cards) in
+   the standard content column so the cards align to the same left edge as the
+   heading, and reset the per-child centering the base `main > .section > div`
+   rule would otherwise apply (which left the inline-block cards flush-left). */
+main > .section.cards-member-container {
+  box-sizing: border-box;
+  max-width: 1264px; /* 1200 content + 2 x 32 side padding */
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+main > .section.cards-member-container > div {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
 /* Grey partition line after the "Sign in…" intro paragraph. Spacing below the
    line keeps it clear of the cards / lock ribbons (no overlap). */
 .section.cards-member-container .default-content-wrapper {
@@ -28,7 +45,7 @@
   border-bottom: 1px solid #e6e6e6;
 }
 
-/* No pre-footer partition line for this section — the Members Only divider
+/* No pre-footer partition line after this section — the Members Only divider
    above already separates it; a second line after the cards is redundant. */
 main > .section.cards-member-container::after {
   content: none;
@@ -43,18 +60,20 @@ main > .section.cards-member-container::after {
   filter: grayscale(80%);
 }
 
-@media (width >= 600px) {
+/* Two fixed-size cards side by side on wider screens; stacked below. */
+@media (width >= 900px) {
   main > .section.cards-member-container > .default-content-wrapper ~ .cards-member-wrapper {
     display: inline-block;
     box-sizing: border-box;
-    height: 250px;
-    width: 250px;
+    width: 350px;
+    max-width: 100%;
+    min-height: 250px;
     vertical-align: top;
   }
 
   main > .section.cards-member-container
     > .cards-member-wrapper:not(:last-of-type) {
-    margin-right: 20px;
+    margin-right: 24px;
   }
 }
 
