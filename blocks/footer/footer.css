@@ -4,6 +4,7 @@ footer {
   background-color: #202020;
   color: #ebebeb;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding-block: 40px;
 }
 
 /* Fixed, centered content width (like the reference): the sections live in a
@@ -13,7 +14,7 @@ footer .footer-inner {
   box-sizing: border-box;
   margin-inline: auto;
   max-width: 1200px;
-  padding: 16px 24px 24px;
+  padding-inline: 24px;
   display: grid;
   grid-template-areas:
     'brand'
@@ -120,7 +121,7 @@ footer .footer-legal a {
     flex-wrap: wrap;
     align-items: center;
     gap: 16px 32px;
-    padding: 24px 24px 32px;
+    padding-inline: 24px;
   }
 
   footer .footer-brand {
