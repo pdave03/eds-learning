@@ -47,5 +47,27 @@ export default async function decorate(block) {
     decorateSocialLinks(social, { variant: 'light' });
   }
 
+  // Underline the footer nav link for the current page. A link matches when
+  // the current page IS that page (e.g. /us/en/magazine) OR is a child of it
+  // (e.g. /us/en/magazine/arctic-surfing), so section and article pages both
+  // mark the same top-level link as selected.
+  const footerNav = footer.querySelector('.footer-nav');
+  if (footerNav) {
+    const currentPath = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '');
+    footerNav.querySelectorAll('a[href]').forEach((a) => {
+      let linkPath;
+      try {
+        linkPath = new URL(a.href, window.location).pathname.replace(/\.html$/, '').replace(/\/+$/, '');
+      } catch (e) {
+        return;
+      }
+      if (linkPath && (currentPath === linkPath || currentPath.startsWith(`${linkPath}/`))) {
+        const li = a.closest('li') || a;
+        li.classList.add('footer-nav-active');
+        a.setAttribute('aria-current', 'page');
+      }
+    });
+  }
+
   block.append(footer);
 }

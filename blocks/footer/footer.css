@@ -6,9 +6,11 @@ footer {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* Near full-bleed like the carousel: content spans the viewport with a small
+   inset on each side (no 1200px cap). */
 footer .footer {
-  margin: auto;
-  max-width: 1200px;
+  margin: 0;
+  max-width: none;
   padding: 16px 24px 24px;
   display: grid;
   grid-template-areas:
@@ -67,6 +69,12 @@ footer .footer-nav a {
   text-transform: uppercase;
 }
 
+/* active page: underline the matching footer nav link */
+footer .footer-nav li.footer-nav-active > a:any-link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 /* social */
 footer .footer-social {
   grid-area: social;
@@ -104,12 +112,35 @@ footer .footer-legal a {
 /* ---------- Desktop (>= 900px) ---------- */
 @media (width >= 900px) {
   footer .footer {
-    padding: 16px 32px 24px;
+    padding: 16px 48px 24px;
     grid-template-areas:
       'brand nav social'
       'legal legal legal';
     grid-template-columns: auto 1fr auto;
     column-gap: 48px;
-    align-items: start;
+    align-items: center;
+  }
+
+  /* nav links sit next to the brand on the left */
+  footer .footer-nav ul {
+    justify-content: flex-start;
+  }
+
+  /* social block right-aligned in its column */
+  footer .footer-social {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  footer .footer-social h4 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  /* legal spans full width below */
+  footer .footer-legal {
+    margin-top: 8px;
   }
 }
