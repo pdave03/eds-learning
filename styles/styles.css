@@ -470,3 +470,97 @@ main .breadcrumb li:not(:first-child)::before {
 main .breadcrumb li:last-child {
   font-weight: 400;
 }
+
+/* ---------- Magazine article two-column layout ----------
+   Article content on the left, related-articles list as a right sidebar
+   (matches the WKND article design). Single column on mobile. */
+main .article-layout {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+main .article-layout .article-aside-heading {
+  margin: 0 0 24px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #202020;
+}
+
+/* related-articles list as a vertical list of link + date, with a left rule */
+main .article-aside .cards-article ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main .article-aside .cards-article li {
+  display: block;
+  border: 0;
+  border-left: 1px solid #d8d8d8;
+  padding: 0 0 28px 20px;
+}
+
+main .article-aside .cards-article li:last-child {
+  padding-bottom: 0;
+}
+
+main .article-aside .cards-article-card-body {
+  display: block;
+}
+
+main .article-aside a.cards-article-card-title {
+  display: block;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: #202020;
+  text-decoration: none;
+}
+
+main .article-aside a.cards-article-card-title:hover {
+  text-decoration: underline;
+}
+
+main .article-aside .cards-article-card-description {
+  margin: 8px 0 0;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+}
+
+/* inside the two-column layout the article body fills the left column
+   (drop the standalone article's centered 780px column + breadcrumb centering) */
+main .article-layout .article-body,
+main .article-layout .breadcrumb {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+@media (width >= 900px) {
+  main .article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    column-gap: 64px;
+    align-items: start;
+  }
+
+  main .article-layout .article-main {
+    min-width: 0;
+  }
+
+  main .article-layout .article-aside {
+    position: sticky;
+    top: 24px;
+  }
+}
