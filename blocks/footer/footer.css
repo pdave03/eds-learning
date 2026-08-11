@@ -7,7 +7,7 @@ footer {
   padding-block: 40px;
 
   /* inset the dark band from the viewport edges so it does not run edge-to-edge */
-  margin-inline: 24px;
+  margin-inline: 48px;
 }
 
 /* Fixed, centered content width (like the reference): the sections live in a
@@ -17,7 +17,6 @@ footer .footer-inner {
   box-sizing: border-box;
   margin-inline: auto;
   max-width: 1200px;
-  padding-inline: 24px;
   display: grid;
   grid-template-areas:
     'brand'
@@ -124,7 +123,6 @@ footer .footer-legal a {
     flex-wrap: wrap;
     align-items: center;
     gap: 16px 32px;
-    padding-inline: 24px;
   }
 
   footer .footer-brand {
