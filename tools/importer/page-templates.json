@@ -1,0 +1,192 @@
+{
+  "metadata": {
+    "projectType": "doc"
+  },
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://wknd.site/us/en.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND homepage: header, hero carousel, featured article (image+text), recent articles (cards), climbing NZ promo (image+text), next adventures (cards), footer.",
+      "blocks": [
+        {
+          "name": "carousel-hero",
+          "instances": [
+            "div.carousel.cmp-carousel--hero"
+          ]
+        },
+        {
+          "name": "columns-featured",
+          "instances": [
+            "div.teaser.cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "columns-imgbottom",
+          "instances": [
+            "div.teaser.cmp-teaser--imagebottom"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "div.image-list.list"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero Carousel",
+          "selector": "div.carousel.cmp-carousel--hero",
+          "style": null,
+          "blocks": [
+            "carousel-hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Featured Article",
+          "selector": "div.teaser.cmp-teaser--featured",
+          "style": null,
+          "blocks": [
+            "columns-featured"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Recent Articles",
+          "selector": "main.cmp-layout-container--fixed:nth-of-type(1)",
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            "div.title.cmp-title--underline",
+            "div.button.cmp-button--primary"
+          ]
+        },
+        {
+          "id": "section-4",
+          "name": "Next Adventures",
+          "selector": "main.cmp-layout-container--fixed:nth-of-type(2)",
+          "style": null,
+          "blocks": [
+            "columns-imgbottom",
+            "cards-article"
+          ],
+          "defaultContent": [
+            "div.title",
+            "div.button.cmp-button--primary"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "magazine",
+      "urls": [
+        "https://wknd.site/us/en/magazine.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND Magazine page: Magazine title, featured article (image+text), All Articles cards grid, Members Only heading, and two members-only promo teasers (text + image). Reuses homepage blocks.",
+      "blocks": [
+        {
+          "name": "columns-featured",
+          "instances": [
+            "div.teaser.cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "div.image-list.list"
+          ]
+        },
+        {
+          "name": "cards-member",
+          "instances": [
+            "div.teaser.cmp-teaser--secure"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Featured Article",
+          "selector": "div.teaser.cmp-teaser--featured",
+          "style": null,
+          "blocks": [
+            "columns-featured"
+          ],
+          "defaultContent": [
+            "h1"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "All Articles",
+          "selector": "div.image-list.list",
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            "div.title.cmp-title--underline"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "Members Only",
+          "selector": "div.teaser.cmp-teaser--secure",
+          "style": null,
+          "blocks": [
+            "cards-member"
+          ],
+          "defaultContent": [
+            "div.title.cmp-title--underline",
+            "div.text"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "about-us",
+      "urls": [
+        "https://wknd.site/us/en/about-us.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND About Us page: About Us title, and two contributor sections (Our Contributors, WKND Guides) each with an intro paragraph and a grid of contributor cards (circular photo + name + title). Uses a custom contributors block.",
+      "blocks": [
+        {
+          "name": "contributors",
+          "instances": [
+            "div.cmp-container:has(> div.image):has(> div.title)"
+          ]
+        },
+        {
+          "name": "social-media",
+          "instances": []
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Our Contributors",
+          "selector": "div.cmp-container:has(> div.image):has(> div.title)",
+          "style": null,
+          "blocks": [
+            "contributors"
+          ],
+          "defaultContent": [
+            "h1",
+            "div.title.cmp-title--underline"
+          ]
+        }
+      ]
+    }
+  ]
+}

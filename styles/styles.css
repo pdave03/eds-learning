@@ -119,6 +119,41 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
+/* ---------- Unified typography (WKND) ----------
+   Every heading, sub-heading and paragraph across the page uses one of three
+   type styles, matching the "Recent Articles" reference. Colors are left to
+   each context (light on the dark footer, dark in main content). */
+
+/* Title: h1 / h2 — serif, 36px */
+h1,
+h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+/* Sub-heading: h3–h6 — Source Sans, 18px, uppercase */
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* Paragraph — Source Sans, 14px */
+p {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 p,
 dl,
 ol,
@@ -278,6 +313,32 @@ button.button.accent:disabled:focus-visible {
   color: var(--dark-color);
 }
 
+/* WKND CTA buttons — standalone default-content links (e.g. "All Articles",
+   "All Trips") render as a yellow, uppercase, rectangular button to match the
+   block CTAs (View Trips, Full Article, See Trip) across the whole page. */
+main .default-content-wrapper p:not(.button-wrapper) > a:only-child {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: #ffea00;
+  color: #202020;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+main .default-content-wrapper p:not(.button-wrapper) > a:only-child:hover,
+main .default-content-wrapper p:not(.button-wrapper) > a:only-child:focus-visible {
+  background-color: #e6d200;
+  color: #202020;
+}
+
 main img {
   max-width: 100%;
   width: auto;
@@ -322,4 +383,35 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+/* Partition line — thin light rule at content width. Placed before the
+   "Next Adventures" section and after the last content section (above the
+   dark footer, so it sits on the light background and stays visible). */
+main > .section.columns-imgbottom-container::before,
+main > .section:last-child::after {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  border-top: 1px solid #e6e6e6;
+}
+
+/* space the "Next Adventures" divider from the content above it */
+main > .section.columns-imgbottom-container::before {
+  margin-bottom: 40px;
+}
+
+/* space the pre-footer divider from the content above it */
+main > .section:last-child::after {
+  margin-top: 40px;
+}
+
+@media (width >= 900px) {
+  main > .section.columns-imgbottom-container::before,
+  main > .section:last-child::after {
+    padding: 0 32px;
+  }
 }

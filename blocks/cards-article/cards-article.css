@@ -1,0 +1,83 @@
+/* WKND Recent Articles / Adventures cards — borderless, 4-up grid */
+
+/* Section heading above the cards ("Recent Articles" / "Next Adventures")
+   gets a short yellow underline, matching the WKND source. Scoped to a
+   section that contains a cards-article block so other headings are untouched. */
+.section:has(.cards-article) .default-content-wrapper h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  color: #202020;
+  text-transform: none;
+}
+
+.section:has(.cards-article) .default-content-wrapper h2::after {
+  content: '';
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid #ffea00;
+}
+
+.cards-article > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.cards-article > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+.cards-article .cards-article-card-image {
+  line-height: 0;
+}
+
+.cards-article .cards-article-card-image a,
+.cards-article .cards-article-card-image picture {
+  display: block;
+}
+
+.cards-article > ul > li img {
+  width: 100%;
+  aspect-ratio: 765 / 535;
+  object-fit: cover;
+}
+
+.cards-article .cards-article-card-body {
+  margin: 16px 0 0;
+}
+
+/* card title — uppercase, bold */
+.cards-article .cards-article-card-title {
+  display: block;
+  color: #202020;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.cards-article .cards-article-card-title:hover,
+.cards-article .cards-article-card-title:focus-visible {
+  text-decoration: underline;
+}
+
+/* description — gray, truncated to two lines with ellipsis */
+.cards-article .cards-article-card-description {
+  margin: 8px 0 0;
+  color: #696969;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}

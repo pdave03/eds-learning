@@ -1,0 +1,218 @@
+/* Near full-bleed hero: break out of the section's 1200px content width so
+   the image spans (almost) the full viewport, with a small inset on both
+   sides for the whole block (image + controls). Stays fluid on all devices. */
+main > .section > .carousel-hero-wrapper {
+  max-width: none;
+  padding: 0 24px;
+}
+
+@media (width >= 900px) {
+  main > .section > .carousel-hero-wrapper {
+    padding: 0 48px;
+  }
+}
+
+.carousel-hero .carousel-hero-slides-container {
+  position: relative;
+}
+
+.carousel-hero .carousel-hero-slides,
+.carousel-hero .carousel-hero-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-hero .carousel-hero-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+}
+
+.carousel-hero .carousel-hero-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-hero .carousel-hero-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  width: 100%;
+  min-height: min(52vw, calc(100dvh - var(--nav-height)));
+}
+
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture {
+  position: absolute;
+  inset: 0;
+}
+
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ---------- White content box, centered, stuck to the bottom of the image ---------- */
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+  z-index: 1;
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px;
+  background-color: #fff;
+  color: #202020;
+  text-align: left;
+}
+
+.carousel-hero .carousel-hero-slide-content h1,
+.carousel-hero .carousel-hero-slide-content h2,
+.carousel-hero .carousel-hero-slide-content h3 {
+  margin: 0 0 12px;
+  color: #202020;
+}
+
+.carousel-hero .carousel-hero-slide-content p {
+  margin: 0 0 16px;
+  color: #202020;
+}
+
+.carousel-hero .carousel-hero-slide-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Yellow rectangular CTA button */
+.carousel-hero .carousel-hero-slide-content a:any-link {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: #ffea00;
+  color: #202020;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.carousel-hero .carousel-hero-slide-content a:hover,
+.carousel-hero .carousel-hero-slide-content a:focus-visible {
+  background-color: #e6d200;
+}
+
+/* ---------- Controls row below the image ---------- */
+.carousel-hero .carousel-hero-controls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  min-height: 24px;
+}
+
+.carousel-hero .carousel-hero-slide-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: #d0d0d0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button:disabled,
+.carousel-hero .carousel-hero-slide-indicator button:hover,
+.carousel-hero .carousel-hero-slide-indicator button:focus-visible {
+  background-color: #202020;
+}
+
+/* Thin line arrows, bottom-right */
+.carousel-hero .carousel-hero-navigation-buttons {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel-hero .carousel-hero-navigation-buttons button {
+  position: relative;
+  width: 30px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: #202020;
+  cursor: pointer;
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button:hover,
+.carousel-hero .carousel-hero-navigation-buttons button:focus-visible {
+  color: #000;
+}
+
+/* arrow shaft */
+.carousel-hero .carousel-hero-navigation-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: currentcolor;
+  transform: translateY(-50%);
+}
+
+/* arrow head */
+.carousel-hero .carousel-hero-navigation-buttons button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border: 2px solid currentcolor;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button.slide-prev::after {
+  left: 0;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button.slide-next::after {
+  right: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (width >= 900px) {
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+    width: min(62%, 780px);
+    margin: 0 auto;
+    padding: 32px 40px;
+  }
+}

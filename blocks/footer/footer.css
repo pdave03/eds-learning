@@ -1,20 +1,164 @@
+/* WKND footer — dark background, light text */
+
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #202020;
+  color: #ebebeb;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+/* Near full-bleed like the carousel: content spans the viewport with a small
+   inset on each side (no 1200px cap). The sections live in a single inner
+   wrapper (.footer-inner), which is where the layout is applied. */
+footer .footer-inner {
+  margin: 0;
+  max-width: none;
+  padding: 16px 24px 24px;
+  display: grid;
+  grid-template-areas:
+    'brand'
+    'nav'
+    'social'
+    'legal';
+  gap: 16px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+footer .footer a:any-link {
+  color: #ebebeb;
+  text-decoration: none;
+}
+
+footer .footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+footer .footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* brand / logo */
+footer .footer-brand {
+  grid-area: brand;
+}
+
+footer .footer-brand img {
+  width: 128px;
+  height: auto;
+  display: block;
+}
+
+/* footer nav */
+footer .footer-nav {
+  grid-area: nav;
+}
+
+footer .footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer-nav a {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* active page: underline the matching footer nav link */
+footer .footer-nav li.footer-nav-active > a:any-link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* social */
+footer .footer-social {
+  grid-area: social;
+}
+
+footer .footer-social h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ebebeb;
+}
+
+/* social icon links are styled by the reusable social-media block */
+
+/* legal / copyright */
+footer .footer-legal {
+  grid-area: legal;
+  padding-top: 16px;
+  border-top: 1px solid rgb(235 235 235 / 20%);
+  font-size: 12px;
+  color: #f7f7f7;
+  line-height: 1.5;
+}
+
+footer .footer-legal p + p {
+  margin-top: 12px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer-legal a {
+  text-decoration: underline;
+}
+
+/* ---------- Desktop (>= 900px) ---------- */
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  /* Single top row: logo + nav links (left) and social (right), with the
+     legal block wrapping to a full-width row below. */
+  footer .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 32px;
+    padding: 16px 48px 24px;
+  }
+
+  footer .footer-brand {
+    flex: 0 0 auto;
+  }
+
+  /* nav links sit on the same line as the logo, next to it */
+  footer .footer-nav {
+    flex: 1 1 auto;
+  }
+
+  footer .footer-nav ul {
+    justify-content: flex-start;
+  }
+
+  /* social block pushed to the right, on the same line */
+  footer .footer-social {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  /* "Follow Us" heading + icons side by side (EDS wraps them in
+     .default-content-wrapper, so the flex row goes on that wrapper) */
+  footer .footer-social .default-content-wrapper,
+  footer .footer-social:not(:has(.default-content-wrapper)) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  footer .footer-social h4 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  /* legal spans the full width on its own row below */
+  footer .footer-legal {
+    flex: 0 0 100%;
+    margin-top: 8px;
   }
 }

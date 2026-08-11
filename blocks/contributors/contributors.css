@@ -1,0 +1,138 @@
+/* WKND Contributors — responsive grid of cards: circular photo, name, title.
+   Each contributor is its own block, so the section holds many
+   .contributors-wrapper siblings interleaved with the section headings
+   (.default-content-wrapper). Flex-wrap lays the cards into rows; the
+   full-width headings force a line break between the two groups. */
+main > .section.contributors-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 24px;
+  align-items: start;
+  box-sizing: border-box;
+  max-width: 1264px;
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+/* neutralise the base per-child content-width wrapper so cards can sit inline */
+main > .section.contributors-container > div {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+/* no pre-footer partition line for this section (it would also become a stray
+   flex item on the flex section) */
+main > .section.contributors-container::after {
+  content: none;
+}
+
+/* the empty trailing section that follows the contributors section must not
+   draw the global pre-footer partition line either (About Us ends on the
+   contributor grid — no divider before the footer) */
+main > .section.contributors-container + .section:last-child::after {
+  content: none;
+}
+
+/* section headings / intros span the full row (break the flow between groups) */
+main > .section.contributors-container > .default-content-wrapper {
+  flex: 0 0 100%;
+  margin-bottom: 0;
+}
+
+/* each contributor card */
+main > .section.contributors-container > .contributors-wrapper {
+  flex: 1 1 200px;
+  max-width: 280px;
+}
+
+/* "Our Contributors" / "WKND Guides" headings get the short yellow underline */
+main > .section.contributors-container .default-content-wrapper h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  color: #202020;
+  text-transform: none;
+}
+
+main > .section.contributors-container .default-content-wrapper h2::after {
+  content: '';
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid #ffea00;
+}
+
+.contributors > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px 24px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.contributors > ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 0;
+  background-color: transparent;
+}
+
+/* circular photo */
+.contributors .contributors-photo {
+  width: 164px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.contributors .contributors-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* info */
+.contributors .contributors-info {
+  margin-top: 20px;
+}
+
+.contributors .contributors-info > * {
+  margin: 0;
+}
+
+.contributors .contributors-name {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #202020;
+}
+
+.contributors .contributors-title {
+  margin-top: 8px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: #202020;
+}
+
+/* per-contributor social icons — dark band, centred under the card */
+.contributors .contributors-social {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.contributors .contributors-social .social-media-list {
+  --social-media-size: 40px;
+  --social-media-icon: 17px;
+}

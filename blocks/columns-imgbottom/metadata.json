@@ -1,0 +1,41 @@
+{
+  "variantName": "columns-imgbottom",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-08-10T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en.html",
+    "originPage": "WKND homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "feature",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + description + CTA + full-width image below",
+    "buttonCount": 1,
+    "imageCount": 1,
+    "columns": 1,
+    "arrangement": "text on top, full-width image at bottom (image-bottom)"
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "promo blocks where text sits above a full-width image",
+      "image-bottom teaser layouts",
+      "single-column image + text sections with a CTA"
+    ],
+    "notSuitableFor": [
+      "side-by-side image + text layouts (use columns-featured)",
+      "repeating item grids (use cards)",
+      "multi-column comparisons"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T00:00:00.000Z"
+  }
+}
