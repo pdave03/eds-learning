@@ -6,12 +6,13 @@ footer {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* Near full-bleed like the carousel: content spans the viewport with a small
-   inset on each side (no 1200px cap). The sections live in a single inner
-   wrapper (.footer-inner), which is where the layout is applied. */
+/* Fixed, centered content width (like the reference): the sections live in a
+   single inner wrapper (.footer-inner) capped at 1200px and centered, with
+   side padding so it never touches the viewport edges. */
 footer .footer-inner {
-  margin: 0;
-  max-width: none;
+  box-sizing: border-box;
+  margin-inline: auto;
+  max-width: 1200px;
   padding: 16px 24px 24px;
   display: grid;
   grid-template-areas:
@@ -119,7 +120,7 @@ footer .footer-legal a {
     flex-wrap: wrap;
     align-items: center;
     gap: 16px 32px;
-    padding: 16px 48px 24px;
+    padding: 24px 24px 32px;
   }
 
   footer .footer-brand {
