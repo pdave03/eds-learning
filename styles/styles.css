@@ -415,3 +415,58 @@ main > .section:last-child::after {
     padding: 0 32px;
   }
 }
+
+/* ---------- Breadcrumb (article pages) ----------
+   Bold uppercase crumbs separated by a yellow arrow; the current page (last
+   item, no link) is regular weight. Aligned to the article reading column. */
+main .breadcrumb {
+  box-sizing: border-box;
+  max-width: 780px;
+  margin: 8px auto 24px;
+  padding-inline: 24px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+main .breadcrumb li {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-weight: 700;
+  color: #202020;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+main .breadcrumb li a:any-link {
+  color: #202020;
+  text-decoration: none;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+main .breadcrumb li a:hover {
+  text-decoration: underline;
+}
+
+/* yellow arrow separator before every item except the first */
+main .breadcrumb li:not(:first-child)::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-right: 12px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid #ffea00;
+}
+
+/* current page (last crumb, no link) is regular weight */
+main .breadcrumb li:last-child {
+  font-weight: 400;
+}

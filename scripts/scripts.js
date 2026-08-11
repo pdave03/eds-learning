@@ -143,6 +143,31 @@ function decorateButtons(main) {
 }
 
 /**
+ * Tags an article breadcrumb list so it can be styled.
+ * The importer brings the breadcrumb in as a plain <ol> at the very top of the
+ * page (before the <h1>) whose first item links to a parent page. Detect that
+ * pattern and add the `breadcrumb` class; breadcrumb styling lives in
+ * styles.css. Runs before section decoration so the <ol> is still at the top
+ * of the content flow.
+ * @param {Element} main The main container element
+ */
+function decorateBreadcrumb(main) {
+  const ol = main.querySelector('ol');
+  if (!ol || ol.classList.contains('breadcrumb')) return;
+  // must start with a link to a parent page
+  if (!ol.querySelector('li a[href]')) return;
+  // must appear before the first heading (breadcrumbs sit at the top of the page).
+  // Compare positions via a flat document-order list to avoid bitwise flags.
+  const firstHeading = main.querySelector('h1, h2, h3, h4, h5, h6');
+  if (firstHeading) {
+    const all = [...main.querySelectorAll('*')];
+    if (all.indexOf(ol) > all.indexOf(firstHeading)) return;
+  }
+  ol.classList.add('breadcrumb');
+  ol.setAttribute('aria-label', 'Breadcrumb');
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -150,6 +175,7 @@ function decorateButtons(main) {
 export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
+  decorateBreadcrumb(main);
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
