@@ -7,8 +7,9 @@ footer {
 }
 
 /* Near full-bleed like the carousel: content spans the viewport with a small
-   inset on each side (no 1200px cap). */
-footer .footer {
+   inset on each side (no 1200px cap). The sections live in a single inner
+   wrapper (.footer-inner), which is where the layout is applied. */
+footer .footer-inner {
   margin: 0;
   max-width: none;
   padding: 16px 24px 24px;
@@ -111,24 +112,33 @@ footer .footer-legal a {
 
 /* ---------- Desktop (>= 900px) ---------- */
 @media (width >= 900px) {
-  footer .footer {
-    padding: 16px 48px 24px;
-    grid-template-areas:
-      'brand nav social'
-      'legal legal legal';
-    grid-template-columns: auto 1fr auto;
-    column-gap: 48px;
+  /* Single top row: logo + nav links (left) and social (right), with the
+     legal block wrapping to a full-width row below. */
+  footer .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    gap: 16px 32px;
+    padding: 16px 48px 24px;
   }
 
-  /* nav links sit next to the brand on the left */
+  footer .footer-brand {
+    flex: 0 0 auto;
+  }
+
+  /* nav links sit on the same line as the logo, next to it */
+  footer .footer-nav {
+    flex: 1 1 auto;
+  }
+
   footer .footer-nav ul {
     justify-content: flex-start;
   }
 
-  /* social block right-aligned in its column */
+  /* social block pushed to the right, on the same line */
   footer .footer-social {
-    justify-self: end;
+    flex: 0 0 auto;
+    margin-left: auto;
   }
 
   /* "Follow Us" heading + icons side by side (EDS wraps them in
@@ -137,6 +147,7 @@ footer .footer-legal a {
   footer .footer-social:not(:has(.default-content-wrapper)) {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 16px;
   }
 
@@ -145,8 +156,9 @@ footer .footer-legal a {
     white-space: nowrap;
   }
 
-  /* legal spans full width below */
+  /* legal spans the full width on its own row below */
   footer .footer-legal {
+    flex: 0 0 100%;
     margin-top: 8px;
   }
 }
