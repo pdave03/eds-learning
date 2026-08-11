@@ -153,6 +153,25 @@ export default async function decorate(block) {
     navTools.className = 'nav-tools';
     navTools.append(search);
     nav.append(navTools);
+
+    // Highlight the active nav link. A link matches when the current page IS
+    // that page (e.g. /us/en/magazine) OR is a child of it (e.g.
+    // /us/en/magazine/arctic-surfing), so section landing pages and article
+    // pages both light up the same top-level link.
+    const currentPath = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '');
+    navSections.querySelectorAll('a[href]').forEach((a) => {
+      let linkPath;
+      try {
+        linkPath = new URL(a.href, window.location).pathname.replace(/\.html$/, '').replace(/\/+$/, '');
+      } catch (e) {
+        return;
+      }
+      if (linkPath && (currentPath === linkPath || currentPath.startsWith(`${linkPath}/`))) {
+        const li = a.closest('li') || a;
+        li.classList.add('nav-active');
+        a.setAttribute('aria-current', 'page');
+      }
+    });
   }
 
   // hamburger for mobile

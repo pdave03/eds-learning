@@ -274,6 +274,16 @@ header nav .nav-sections a:hover {
   text-decoration: underline;
 }
 
+/* active page: yellow highlight on the matching top-level link */
+header nav .nav-sections li.nav-active > a:any-link {
+  background-color: #ffea00;
+  color: #202020;
+}
+
+header nav .nav-sections li.nav-active > a:hover {
+  text-decoration: none;
+}
+
 /* ---------- Search (tools) ---------- */
 header nav .nav-tools {
   grid-area: tools;
@@ -463,7 +473,7 @@ header nav .nav-search input::placeholder {
   header nav .nav-sections ul {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 8px;
   }
 
