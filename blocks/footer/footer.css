@@ -129,6 +129,12 @@ footer .footer-legal a {
   /* social block right-aligned in its column */
   footer .footer-social {
     justify-self: end;
+  }
+
+  /* "Follow Us" heading + icons side by side (EDS wraps them in
+     .default-content-wrapper, so the flex row goes on that wrapper) */
+  footer .footer-social .default-content-wrapper,
+  footer .footer-social:not(:has(.default-content-wrapper)) {
     display: flex;
     align-items: center;
     gap: 16px;
