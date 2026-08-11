@@ -5,6 +5,9 @@ footer {
   color: #ebebeb;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding-block: 40px;
+
+  /* inset the dark band from the viewport edges so it does not run edge-to-edge */
+  margin-inline: 24px;
 }
 
 /* Fixed, centered content width (like the reference): the sections live in a
