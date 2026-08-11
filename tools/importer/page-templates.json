@@ -187,6 +187,63 @@
           ]
         }
       ]
+    },
+    {
+      "name": "magazine-article",
+      "urls": [
+        "https://wknd.site/us/en/magazine/arctic-surfing.html",
+        "https://wknd.site/us/en/magazine/san-diego-surf.html",
+        "https://wknd.site/us/en/magazine/ski-touring.html",
+        "https://wknd.site/us/en/magazine/guide-la-skateparks.html",
+        "https://wknd.site/us/en/magazine/western-australia.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND magazine article pages: hero image, title + subtitle, long-form article body (content fragment: paragraphs, subheadings, inline images), author byline (contributors block), and an 'Up Next' related-articles list (cards-article). Same structure across all articles.",
+      "blocks": [
+        {
+          "name": "article-body",
+          "instances": [
+            "article.contentfragment"
+          ]
+        },
+        {
+          "name": "contributors",
+          "instances": [
+            "div.cmp-byline"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "div.list.cmp-list--upnext"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Article",
+          "selector": "article.contentfragment",
+          "style": null,
+          "blocks": [
+            "article-body",
+            "contributors"
+          ],
+          "defaultContent": [
+            "div.title.cmp-title--underline"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Up Next",
+          "selector": "div.list.cmp-list--upnext",
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": []
+        }
+      ]
     }
   ]
 }

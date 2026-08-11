@@ -83,6 +83,17 @@ export default function transform(hookName, element, payload) {
       'link',
     ]);
 
+    // Article-page social-share chrome (magazine article pages only): the
+    // "SHARE THIS STORY" title + the share-buttons building block are UI, not
+    // authorable content. Selectors are absent on other WKND templates, so
+    // this is a no-op there.
+    WebImporter.DOMUtils.remove(element, [
+      'div.buildingblock.cmp-buildingblock--btn-list',
+    ]);
+    element.querySelectorAll('div.title').forEach((t) => {
+      if (/^\s*share this story\s*$/i.test(t.textContent || '')) t.remove();
+    });
+
     // Strip AEM component attributes + microdata from the root and every element.
     stripAemAttributes(element);
     element.querySelectorAll('*').forEach(stripAemAttributes);
