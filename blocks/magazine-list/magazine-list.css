@@ -1,0 +1,8 @@
+/* magazine-list renders its cards using the cards-article markup + styling
+   (loaded at runtime), so the dynamic grid matches the hardcoded cards exactly.
+   Only the empty-state message is styled here. */
+.magazine-list-empty {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #696969;
+}

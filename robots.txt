@@ -1,0 +1,12 @@
+# robots.txt for the WKND site (applies on the production domain).
+# On *.aem.page / *.aem.live AEM serves its own "Disallow: /" to keep preview
+# hosts out of search engines; this file governs the production host.
+
+User-agent: *
+Allow: /
+
+# Keep non-content and tooling paths out of crawlers
+Disallow: /drafts/
+Disallow: /tools/
+
+Sitemap: https://main--eds-learning--pdave03.aem.live/sitemap.xml

@@ -1,0 +1,76 @@
+/* Social Media block — reusable icon band with two variants:
+     .social-media-dark  → black band, white icons  (e.g. contributor rows)
+     .social-media-light  → white band, black icons  (e.g. footer)
+   Link rules are scoped under .social-media-list so they reliably override
+   arbitrary host anchor styles (e.g. the footer's link colours) without any
+   host-specific selectors. Styling keys off the block's own prefixed classes
+   so the same look applies whether the block is authored on a page OR reused
+   by another block that only calls decorateSocialLinks(). */
+.social-media,
+.social-media-list {
+  --social-media-size: 44px;
+  --social-media-icon: 18px;
+  --social-media-gap: 4px;
+  --social-media-radius: 4px;
+
+  /* dark variant defaults: black band, white icons */
+  --social-media-band-bg: #202020;
+  --social-media-color: #fff;
+  --social-media-hover-bg: #ffea00;
+  --social-media-hover-color: #202020;
+}
+
+/* light variant: white band, black icons */
+.social-media-light.social-media,
+.social-media-light.social-media-list,
+.social-media-light .social-media-list {
+  --social-media-band-bg: #fff;
+  --social-media-color: #202020;
+  --social-media-hover-bg: #ffea00;
+  --social-media-hover-color: #202020;
+}
+
+/* the list itself is the band: one rounded rectangle holding the icons */
+ul.social-media-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--social-media-gap);
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background-color: var(--social-media-band-bg);
+  border-radius: var(--social-media-radius);
+}
+
+ul.social-media-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.social-media-list a.social-media-link:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--social-media-size);
+  height: var(--social-media-size);
+  padding: 0;
+  border-radius: var(--social-media-radius);
+  color: var(--social-media-color);
+  background-color: transparent;
+  font-size: 0; /* hide any residual text label */
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.social-media-list a.social-media-link svg {
+  width: var(--social-media-icon);
+  height: var(--social-media-icon);
+  fill: currentcolor;
+  display: block;
+}
+
+.social-media-list a.social-media-link:hover,
+.social-media-list a.social-media-link:focus-visible {
+  color: var(--social-media-hover-color);
+  background-color: var(--social-media-hover-bg);
+}

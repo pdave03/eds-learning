@@ -143,6 +143,72 @@ function decorateButtons(main) {
 }
 
 /**
+ * Tags an article breadcrumb list so it can be styled.
+ * The importer brings the breadcrumb in as a plain <ol> at the very top of the
+ * page (before the <h1>) whose first item links to a parent page. Detect that
+ * pattern and add the `breadcrumb` class; breadcrumb styling lives in
+ * styles.css. Runs before section decoration so the <ol> is still at the top
+ * of the content flow.
+ * @param {Element} main The main container element
+ */
+function decorateBreadcrumb(main) {
+  const ol = main.querySelector('ol');
+  if (!ol || ol.classList.contains('breadcrumb')) return;
+  // must start with a link to a parent page
+  if (!ol.querySelector('li a[href]')) return;
+  // must appear before the first heading (breadcrumbs sit at the top of the page).
+  // Compare positions via a flat document-order list to avoid bitwise flags.
+  const firstHeading = main.querySelector('h1, h2, h3, h4, h5, h6');
+  if (firstHeading) {
+    const all = [...main.querySelectorAll('*')];
+    if (all.indexOf(ol) > all.indexOf(firstHeading)) return;
+  }
+  ol.classList.add('breadcrumb');
+  ol.setAttribute('aria-label', 'Breadcrumb');
+}
+
+/**
+ * Lays out a magazine article as two columns: the article content on the left
+ * and the related-articles list as a right sidebar (matching the WKND design).
+ * The importer emits the article body, byline and related list as flat sibling
+ * wrappers in one section; this groups the main content and the aside into a
+ * grid so CSS can place the aside on the right. Runs after decorateSections
+ * (which creates the *-wrapper / *-container elements).
+ * @param {Element} main The main container element
+ */
+function decorateArticleLayout(main) {
+  const section = main.querySelector('.section.article-body-container.cards-article-container');
+  if (!section || section.querySelector(':scope > .article-layout')) return;
+  const aside = section.querySelector(':scope > .cards-article-wrapper');
+  if (!aside) return;
+
+  const layout = document.createElement('div');
+  layout.className = 'article-layout';
+  const content = document.createElement('div');
+  content.className = 'article-main';
+  const sidebar = document.createElement('aside');
+  sidebar.className = 'article-aside';
+
+  // "Share this story" label above the related list (matches the design).
+  const asideHeading = document.createElement('p');
+  asideHeading.className = 'article-aside-heading';
+  asideHeading.textContent = 'Share this story';
+  sidebar.append(asideHeading);
+
+  // Move the section's children: the related list goes to the sidebar, the
+  // rest (breadcrumb/title/byline default content, article body, author byline)
+  // stays in the main column.
+  [...section.children].forEach((child) => {
+    if (child === aside) sidebar.append(child);
+    else content.append(child);
+  });
+
+  layout.append(content, sidebar);
+  section.append(layout);
+  section.classList.add('article-layout-section');
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -150,7 +216,9 @@ function decorateButtons(main) {
 export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
+  decorateBreadcrumb(main);
   decorateSections(main);
+  decorateArticleLayout(main);
   decorateBlocks(main);
   decorateButtons(main);
 }

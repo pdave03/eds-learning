@@ -1,0 +1,112 @@
+/*
+ * columns-imgbottom: full-bleed image with a white content box (heading +
+ * description + CTA) overlapping the bottom of the image — the same visual
+ * treatment as a carousel-hero slide (see blocks/carousel-hero).
+ */
+
+/* Full-bleed: break out of the section's 1200px content width so the image
+   spans (almost) the full viewport, with a small side inset like the carousel. */
+main > .section > .columns-imgbottom-wrapper {
+  max-width: none;
+  padding: 0 24px;
+}
+
+@media (width >= 900px) {
+  main > .section > .columns-imgbottom-wrapper {
+    padding: 0 48px;
+  }
+}
+
+.columns-imgbottom .columns-imgbottom-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+
+  /* taller on small screens so the image reads well; desktop uses the
+     1680 x 640 banner proportion below */
+  min-height: min(90vw, 60vh);
+}
+
+/* full-bleed background image layer */
+.columns-imgbottom .columns-imgbottom-img-col {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.columns-imgbottom .columns-imgbottom-img-col picture,
+.columns-imgbottom .columns-imgbottom-img-col img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* white content box, centered, stuck to the bottom of the image */
+.columns-imgbottom .columns-imgbottom-content-col {
+  z-index: 1;
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px;
+  background-color: #fff;
+  color: #202020;
+  text-align: left;
+}
+
+.columns-imgbottom .columns-imgbottom-content-col h1,
+.columns-imgbottom .columns-imgbottom-content-col h2,
+.columns-imgbottom .columns-imgbottom-content-col h3 {
+  margin: 0 0 12px;
+  color: #202020;
+}
+
+.columns-imgbottom .columns-imgbottom-content-col p {
+  margin: 0 0 16px;
+  color: #202020;
+}
+
+.columns-imgbottom .columns-imgbottom-content-col p:last-child {
+  margin-bottom: 0;
+}
+
+/* Yellow rectangular CTA ("See Trip") */
+.columns-imgbottom .columns-imgbottom-content-col a:any-link {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: #ffea00;
+  color: #202020;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.columns-imgbottom .columns-imgbottom-content-col a:hover,
+.columns-imgbottom .columns-imgbottom-content-col a:focus-visible {
+  background-color: #e6d200;
+}
+
+@media (width >= 900px) {
+  .columns-imgbottom .columns-imgbottom-stage {
+    /* 1680 x 640 banner proportion (~2.625:1) */
+    min-height: 0;
+    aspect-ratio: 1680 / 640;
+  }
+
+  .columns-imgbottom .columns-imgbottom-content-col {
+    width: min(62%, 780px);
+    padding: 32px 40px;
+  }
+}

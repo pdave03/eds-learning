@@ -1,0 +1,10 @@
+{
+  "type": "doc",
+  "sites": {
+    "eds-learning": {
+      "previewOrg": "pdave03",
+      "previewSite": "eds-learning",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}
