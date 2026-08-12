@@ -1,41 +1,8 @@
+/* magazine-list renders its cards using the cards-article markup + styling
+   (loaded at runtime), so the dynamic grid matches the hardcoded cards exactly.
+   Only the empty-state message is styled here. */
 .magazine-list-empty {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-align: center;
-}
-
-.magazine-list > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
-}
-
-.magazine-list > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
-}
-
-.magazine-list-card-image {
-  line-height: 0;
-}
-
-.magazine-list-card-image img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-.magazine-list-card-body {
-  margin: 16px;
-}
-
-.magazine-list-card-body h3 {
-  margin-top: 0;
-  font-size: var(--heading-font-size-s);
-}
-
-.magazine-list-card-body p {
-  margin-bottom: 0;
-  color: var(--text-color);
+  color: #696969;
 }
