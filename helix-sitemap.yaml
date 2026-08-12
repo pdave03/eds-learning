@@ -1,0 +1,15 @@
+version: 1
+
+sitemaps:
+  default:
+    # Build /sitemap.xml from the query-index, but only include real pages.
+    # Excludes the header/footer fragments and drafts/tools, which are not
+    # standalone pages and should not appear in search engines.
+    source: /query-index.json
+    destination: /sitemap.xml
+    lastmod: YYYY-MM-DD
+    exclude:
+      - /nav
+      - /footer
+      - /drafts/**
+      - /tools/**
