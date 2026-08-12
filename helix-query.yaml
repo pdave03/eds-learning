@@ -2,6 +2,7 @@ version: 1
 
 indices:
   # Site-wide index → /query-index.json
+  # The magazine-list block reads this and filters to the /magazine section.
   default:
     include:
       - '/**'
@@ -10,37 +11,7 @@ indices:
       - '/tools/**'
       - '/nav'
       - '/footer'
-      - '/**/nav'
-      - '/**/footer'
     target: /query-index.json
-    properties:
-      title:
-        select: head > meta[property="og:title"]
-        value: |
-          attribute(el, 'content')
-      description:
-        select: head > meta[name="description"]
-        value: |
-          attribute(el, 'content')
-      image:
-        select: head > meta[property="og:image"]
-        value: |
-          match(attribute(el, 'content'), 'https:\/\/[^/]+(\/.*)')
-      lastModified:
-        select: none
-        value: |
-          parseTimestamp(headers('last-modified'), 'ddd, DD MMM YYYY hh:mm:ss GMT')
-      robots:
-        select: head > meta[name="robots"]
-        value: |
-          attribute(el, 'content')
-
-  # Magazine article index → /us/en/magazine/query-index.json
-  # (consumed by the magazine-list block; excludes the listing page itself)
-  magazine:
-    include:
-      - '/us/en/magazine/**'
-    target: /us/en/magazine/query-index.json
     properties:
       title:
         select: head > meta[property="og:title"]

@@ -84,7 +84,10 @@ export default async function decorate(block) {
   const magazineRoot = getMagazineRoot();
   let entries = [];
   try {
-    entries = await fetchAllEntries(`${magazineRoot}/query-index.json`);
+    // Read the site-wide index and filter to the magazine section below. (The
+    // default /query-index.json is always generated; a section-scoped index is
+    // not guaranteed to exist.)
+    entries = await fetchAllEntries('/query-index.json');
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('failed to load magazine index', error);
