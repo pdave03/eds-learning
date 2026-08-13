@@ -87,6 +87,20 @@ function createSlide(row, slideIndex, carouselId) {
   return slide;
 }
 
+/**
+ * Replaces a heading element with one of a different level, preserving its id,
+ * classes, other attributes and inner content. Returns the new heading.
+ * @param {Element} heading The heading to replace
+ * @param {string} level The target tag name, e.g. 'h1'
+ */
+function setHeadingLevel(heading, level) {
+  const replacement = document.createElement(level);
+  [...heading.attributes].forEach((attr) => replacement.setAttribute(attr.name, attr.value));
+  replacement.innerHTML = heading.innerHTML;
+  heading.replaceWith(replacement);
+  return replacement;
+}
+
 let carouselId = 0;
 export default async function decorate(block) {
   carouselId += 1;
@@ -130,6 +144,17 @@ export default async function decorate(block) {
   rows.forEach((row, idx) => {
     const slide = createSlide(row, idx, carouselId);
     slidesWrapper.append(slide);
+
+    // The first slide's heading is the top-of-page hero heading, so promote it
+    // to <h1> to give the page a single, top-level heading (the other slides
+    // stay <h2>). Re-point the slide's aria-labelledby at the new heading id.
+    if (idx === 0) {
+      const heading = slide.querySelector('h1, h2, h3, h4, h5, h6');
+      if (heading && heading.tagName !== 'H1') {
+        const h1 = setHeadingLevel(heading, 'h1');
+        if (h1.id) slide.setAttribute('aria-labelledby', h1.id);
+      }
+    }
 
     if (slideIndicators) {
       const indicator = document.createElement('li');
