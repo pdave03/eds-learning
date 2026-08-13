@@ -244,6 +244,52 @@
           "defaultContent": []
         }
       ]
+    },
+    {
+      "name": "adventures",
+      "urls": [
+        "https://wknd.site/us/en/adventures.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND Adventures page: hero teaser (same 'Next Adventures' style as the homepage, via columns-imgbottom) and a 'Current Adventures' section with an adventure-type tab filter (All/Climbing/Cycling/Skiing/Surfing/Travel) that shows/hides card grids.",
+      "blocks": [
+        {
+          "name": "columns-imgbottom",
+          "instances": [
+            "div.teaser.cmp-teaser--hero"
+          ]
+        },
+        {
+          "name": "adventure-tabs",
+          "instances": [
+            "div.tabs.cmp-tabs, div.cmp-tabs"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero",
+          "selector": "div.teaser.cmp-teaser--hero",
+          "style": null,
+          "blocks": [
+            "columns-imgbottom"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Current Adventures",
+          "selector": "div.cmp-tabs",
+          "style": null,
+          "blocks": [
+            "adventure-tabs"
+          ],
+          "defaultContent": [
+            "div.title.cmp-title--underline"
+          ]
+        }
+      ]
     }
   ]
 }
