@@ -128,21 +128,33 @@ main > .section > .carousel-hero-wrapper {
   margin: 0 auto;
 }
 
+/* The visible dot stays 10px, but the button itself is a 24x24 hit area
+   (WCAG 2.5.8 target size) with the dot drawn as a centred pseudo-element. */
 .carousel-hero .carousel-hero-slide-indicator button {
-  width: 10px;
-  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
   margin: 0;
   padding: 0;
   border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button::before {
+  content: '';
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: #d0d0d0;
-  cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.carousel-hero .carousel-hero-slide-indicator button:disabled,
-.carousel-hero .carousel-hero-slide-indicator button:hover,
-.carousel-hero .carousel-hero-slide-indicator button:focus-visible {
+.carousel-hero .carousel-hero-slide-indicator button:disabled::before,
+.carousel-hero .carousel-hero-slide-indicator button:hover::before,
+.carousel-hero .carousel-hero-slide-indicator button:focus-visible::before {
   background-color: #202020;
 }
 
@@ -157,11 +169,13 @@ main > .section > .carousel-hero-wrapper {
   gap: 24px;
 }
 
+/* 30px-wide arrow visual, but a >=24px tall hit area (WCAG 2.5.8) */
 /* stylelint-disable-next-line no-descending-specificity */
 .carousel-hero .carousel-hero-navigation-buttons button {
   position: relative;
   width: 30px;
-  height: 20px;
+  height: 24px;
+  min-height: 24px;
   margin: 0;
   padding: 0;
   border: 0;
@@ -176,6 +190,7 @@ main > .section > .carousel-hero-wrapper {
 }
 
 /* arrow shaft */
+/* stylelint-disable-next-line no-descending-specificity */
 .carousel-hero .carousel-hero-navigation-buttons button::before {
   content: '';
   position: absolute;
