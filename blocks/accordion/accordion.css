@@ -1,0 +1,69 @@
+.accordion .accordion-item {
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.accordion .accordion-item:first-child {
+  border-top: 1px solid #d8d8d8;
+}
+
+.accordion .accordion-item-label {
+  position: relative;
+  display: block;
+  padding: 22px 44px 22px 0;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #202020;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.15s ease-in-out;
+}
+
+/* remove the default disclosure triangle (both engines) */
+.accordion .accordion-item-label::-webkit-details-marker {
+  display: none;
+}
+
+.accordion .accordion-item-label:hover {
+  color: #000;
+}
+
+/* chevron indicator on the right, rotates when the item is open */
+.accordion .accordion-item-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #202020;
+  border-bottom: 2px solid #202020;
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 0.2s ease-in-out;
+}
+
+.accordion .accordion-item[open] .accordion-item-label::after {
+  transform: translateY(-30%) rotate(225deg);
+}
+
+.accordion .accordion-item-body {
+  padding: 0 44px 24px 0;
+}
+
+.accordion .accordion-item-body p {
+  margin: 0 0 16px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+.accordion .accordion-item-body p:last-child {
+  margin-bottom: 0;
+}
+
+.accordion .accordion-item-body a {
+  color: #202020;
+  text-decoration: underline;
+}

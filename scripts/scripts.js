@@ -209,6 +209,48 @@ function decorateArticleLayout(main) {
 }
 
 /**
+ * Lays out the FAQs page as two columns: the FAQ accordion on the left and a
+ * "Need more help?" contact panel as a right sidebar (matching the WKND
+ * design). The importer emits the title, accordion and the "Need more help?"
+ * heading + text as flat sibling wrappers in one section; this groups the
+ * accordion into a left column and everything after it into the aside. The page
+ * title/intro (before the accordion) stays full-width on top. On mobile the two
+ * columns stack with the "Need more help?" panel above the accordion.
+ * Runs after decorateSections (which creates the *-wrapper / *-container
+ * elements). Scoped to the accordion so it only affects the FAQs page.
+ * @param {Element} main The main container element
+ */
+function decorateFaqsLayout(main) {
+  const accordionWrapper = main.querySelector('.section > .accordion-wrapper');
+  if (!accordionWrapper) return;
+  const section = accordionWrapper.parentElement;
+  if (section.querySelector(':scope > .faqs-layout')) return;
+
+  const children = [...section.children];
+  const accordionIndex = children.indexOf(accordionWrapper);
+
+  const layout = document.createElement('div');
+  layout.className = 'faqs-layout';
+  const content = document.createElement('div');
+  content.className = 'faqs-main';
+  const sidebar = document.createElement('aside');
+  sidebar.className = 'faqs-aside';
+
+  // Everything before the accordion (title, intro) stays full-width on top;
+  // the accordion goes to the main column; everything after it (the "Need more
+  // help?" heading + text) goes to the aside.
+  children.forEach((child, i) => {
+    if (i < accordionIndex) return; // leave title/intro in place, above the grid
+    if (i === accordionIndex) content.append(child);
+    else sidebar.append(child);
+  });
+
+  layout.append(content, sidebar);
+  section.append(layout);
+  section.classList.add('faqs-layout-section');
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -218,8 +260,12 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateBreadcrumb(main);
   decorateSections(main);
-  decorateArticleLayout(main);
   decorateBlocks(main);
+  // Layout grouping relies on the *-wrapper / *-container classes added by
+  // decorateBlocks, so it must run after it (but before block JS decoration,
+  // which happens later during loadSection).
+  decorateArticleLayout(main);
+  decorateFaqsLayout(main);
   decorateButtons(main);
 }
 
