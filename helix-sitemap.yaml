@@ -2,6 +2,11 @@ version: 1
 
 sitemaps:
   default:
+    # Absolute URLs need a host. With no production CDN host configured, the
+    # sitemap would emit "https://undefined/..." (invalid). Pin the origin to the
+    # published aem.live host so every <loc> is a valid absolute URL. Replace
+    # this with the production domain once a custom CDN host is set up.
+    origin: https://main--eds-learning--pdave03.aem.live
     # Build /sitemap.xml from the query-index, but only include real pages.
     # Excludes the header/footer fragments and drafts/tools, which are not
     # standalone pages and should not appear in search engines.
