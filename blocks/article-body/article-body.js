@@ -10,9 +10,16 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 export default function decorate(block) {
   // Optimise any inline article images.
   block.querySelectorAll('picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ width: '1200' }]),
-    );
+    const optimized = createOptimizedPicture(img.src, img.alt, false, [{ width: '1200' }]);
+    // Carry over the source image's intrinsic dimensions so the browser
+    // reserves space and avoids layout shift (CLS). Fall back to the WKND
+    // article image ratio (1280x853) when the source omits them.
+    const newImg = optimized.querySelector('img');
+    if (newImg) {
+      newImg.setAttribute('width', img.getAttribute('width') || '1280');
+      newImg.setAttribute('height', img.getAttribute('height') || '853');
+    }
+    img.closest('picture').replaceWith(optimized);
   });
 
   // Images that sit alone in a paragraph get a full-width figure treatment.
