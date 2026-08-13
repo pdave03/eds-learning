@@ -58,7 +58,14 @@ function buildCard(entry) {
     const imgLink = document.createElement('a');
     imgLink.href = entry.path;
     imgLink.setAttribute('aria-label', entry.title || '');
-    imgLink.append(createOptimizedPicture(entry.image, entry.title, false, [{ width: '750' }]));
+    const optimized = createOptimizedPicture(entry.image, entry.title, false, [{ width: '750' }]);
+    // reserve the card aspect-ratio box up front to avoid layout shift (CLS)
+    const cardImg = optimized.querySelector('img');
+    if (cardImg) {
+      cardImg.setAttribute('width', '765');
+      cardImg.setAttribute('height', '535');
+    }
+    imgLink.append(optimized);
     imgP.append(imgLink);
     imageCell.append(imgP);
     li.append(imageCell);

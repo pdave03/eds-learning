@@ -55,7 +55,16 @@ export default function decorate(block) {
     ul.append(li);
   });
 
-  ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '400' }])));
+  ul.querySelectorAll('picture > img').forEach((img) => {
+    const optimized = createOptimizedPicture(img.src, img.alt, false, [{ width: '400' }]);
+    // square intrinsic size for the circular contributor photo (avoids CLS)
+    const photo = optimized.querySelector('img');
+    if (photo) {
+      photo.setAttribute('width', '400');
+      photo.setAttribute('height', '400');
+    }
+    img.closest('picture').replaceWith(optimized);
+  });
   block.replaceChildren(ul);
 
   // social-media CSS is only auto-loaded for a `.social-media` block, so load

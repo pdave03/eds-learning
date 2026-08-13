@@ -28,6 +28,16 @@ export default function decorate(block) {
     });
     ul.append(li);
   });
-  ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  ul.querySelectorAll('picture > img').forEach((img) => {
+    const optimized = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    // Set intrinsic width/height on the <img> so the browser reserves the
+    // card's aspect-ratio box immediately (prevents layout shift / CLS).
+    const newImg = optimized.querySelector('img');
+    if (newImg) {
+      newImg.setAttribute('width', '765');
+      newImg.setAttribute('height', '535');
+    }
+    img.closest('picture').replaceWith(optimized);
+  });
   block.replaceChildren(ul);
 }
