@@ -148,14 +148,19 @@ header nav .nav-locale-list a:any-link {
 /* ---------- Hamburger (mobile) ---------- */
 header nav .nav-hamburger {
   grid-area: hamburger;
-  height: 22px;
+  height: 24px;
   display: flex;
   align-items: center;
   margin-left: 24px;
 }
 
+/* >=24px square hit area (WCAG 2.5.8) around the hamburger icon */
 header nav .nav-hamburger button {
-  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
   margin: 0;
   border: 0;
   border-radius: 0;

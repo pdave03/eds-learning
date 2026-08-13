@@ -70,6 +70,10 @@ footer .footer-nav ul {
 
 /* stylelint-disable-next-line no-descending-specificity */
 footer .footer-nav a {
+  /* >=24px tall tap target (WCAG 2.5.8) without changing the row layout */
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   font-size: 14px;
   text-transform: uppercase;
 }
@@ -109,8 +113,11 @@ footer .footer-legal p + p {
   margin-top: 12px;
 }
 
+/* Inline links in the legal/copyright text must be distinguishable by more than
+   colour (WCAG 1.4.1) — keep them underlined. Scoped through .footer so this
+   wins over the general `footer .footer a { text-decoration: none }` rule. */
 /* stylelint-disable-next-line no-descending-specificity */
-footer .footer-legal a {
+footer .footer .footer-legal a:any-link {
   text-decoration: underline;
 }
 
