@@ -564,3 +564,62 @@ main .article-layout .breadcrumb {
     top: 24px;
   }
 }
+
+/* FAQs page two-column layout:
+   Accordion on the left, "Need more help?" contact panel as a right sidebar.
+   Mobile-first: single column with the sidebar stacked ABOVE the accordion. */
+main .faqs-layout {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+main .faqs-layout .faqs-aside {
+  order: -1; /* on mobile, "Need more help?" appears above the accordion */
+  margin-bottom: 32px;
+}
+
+/* "Need more help?" heading + contact text styling */
+main .faqs-aside h2,
+main .faqs-aside h3 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+main .faqs-aside p {
+  margin: 0;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4a4a4a;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+main .faqs-aside p a:any-link {
+  color: #202020;
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  main .faqs-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    column-gap: 64px;
+    align-items: start;
+  }
+
+  main .faqs-layout .faqs-main {
+    min-width: 0;
+  }
+
+  main .faqs-layout .faqs-aside {
+    order: 0; /* on desktop it sits in the right grid column */
+    margin-bottom: 0;
+    padding: 28px;
+    background-color: #f5f5f5;
+  }
+}

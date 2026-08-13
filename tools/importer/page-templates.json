@@ -290,6 +290,39 @@
           ]
         }
       ]
+    },
+    {
+      "name": "faqs",
+      "urls": [
+        "https://wknd.site/us/en/faqs.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND FAQs page: FAQs title, intro banner image + paragraph, a collapsible FAQ accordion (7 question/answer items, collapsed by default), and a 'Need more help?' contact panel. The accordion + contact panel are laid out as two columns (accordion left, contact panel right) by decorateFaqsLayout in scripts.js.",
+      "blocks": [
+        {
+          "name": "accordion",
+          "instances": [
+            "div.cmp-accordion"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "FAQs",
+          "selector": "main",
+          "style": null,
+          "blocks": [
+            "accordion"
+          ],
+          "defaultContent": [
+            "h1",
+            "div.image",
+            "div.text",
+            "div.title"
+          ]
+        }
+      ]
     }
   ]
 }
