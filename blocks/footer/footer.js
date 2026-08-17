@@ -7,12 +7,22 @@ import { decorateSocialLinks } from '../social-media/social-media.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment — dual-fetch: localhost content path first, then EDS/DA path
+  // Load footer as a fragment. It lives at the canonical path in production
+  // (/footer or the `footer` metadata path) and under /content on the local dev
+  // server. Try the environment's expected path FIRST so production never fires
+  // a 404 for the /content path (and vice-versa on localhost).
   const footerMeta = getMetadata('footer');
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  let loadedFooterPath = '/content/footer';
-  let fragment = await loadFragment(loadedFooterPath);
-  if (!fragment) { loadedFooterPath = footerPath; fragment = await loadFragment(footerPath); }
+  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const candidates = isLocal ? ['/content/footer', footerPath] : [footerPath, '/content/footer'];
+  let loadedFooterPath;
+  let fragment;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const candidate of candidates) {
+    // eslint-disable-next-line no-await-in-loop
+    fragment = await loadFragment(candidate);
+    if (fragment) { loadedFooterPath = candidate; break; }
+  }
   if (!fragment) return;
 
   // decorate footer DOM
