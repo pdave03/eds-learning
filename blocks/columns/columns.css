@@ -157,10 +157,6 @@ main > .section > .columns-wrapper:has(.columns.imgbottom) {
 
 .columns.imgbottom .columns-imgbottom-stage {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
   width: 100%;
 
   /* taller on small screens; desktop uses the 1680 x 640 banner proportion */
@@ -185,13 +181,16 @@ main > .section > .columns-wrapper:has(.columns.imgbottom) {
 }
 /* stylelint-enable no-descending-specificity */
 
-/* white content box, centered, stuck to the bottom of the image */
+/* white content box: sized to its content, pinned to the bottom of the image
+   and horizontally centred (matches the WKND reference). */
 .columns.imgbottom .columns-imgbottom-content-col {
   z-index: 1;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
   box-sizing: border-box;
   width: calc(100% - 48px);
-  margin: 0 auto;
   padding: 28px;
   background-color: var(--brand-white);
   color: var(--brand-ink);
