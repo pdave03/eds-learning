@@ -54,12 +54,22 @@ function closeOnEscape(e) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment — dual-fetch: localhost content path first, then EDS/DA path
+  // Load nav as a fragment. It lives at the canonical path in production
+  // (/nav or the `nav` metadata path) and under /content on the local dev
+  // server. Try the environment's expected path FIRST so production never
+  // fires a 404 for the /content path (and vice-versa on localhost).
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  let loadedNavPath = '/content/nav';
-  let fragment = await loadFragment(loadedNavPath);
-  if (!fragment) { loadedNavPath = navPath; fragment = await loadFragment(navPath); }
+  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const candidates = isLocal ? ['/content/nav', navPath] : [navPath, '/content/nav'];
+  let loadedNavPath;
+  let fragment;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const candidate of candidates) {
+    // eslint-disable-next-line no-await-in-loop
+    fragment = await loadFragment(candidate);
+    if (fragment) { loadedNavPath = candidate; break; }
+  }
   if (!fragment) return;
 
   // decorate nav DOM
