@@ -42,18 +42,18 @@ async function fetchAllEntries(path) {
 
 /**
  * Builds a single card from an index entry, using the SAME markup and classes
- * as the hardcoded cards-article block so the two render identically (and share
- * cards-article.css).
+ * as the cards "article" variant so the two render identically (and share
+ * cards/cards.css).
  * @param {object} entry Query-index entry (title, description, image, path, ...)
  * @returns {HTMLLIElement} The card list item
  */
 function buildCard(entry) {
   const li = document.createElement('li');
 
-  // image cell — image wrapped in its article link (matches cards-article)
+  // image cell — image wrapped in its article link (matches the cards article variant)
   if (entry.image) {
     const imageCell = document.createElement('div');
-    imageCell.className = 'cards-article-card-image';
+    imageCell.className = 'cards-card-image';
     const imgP = document.createElement('p');
     const imgLink = document.createElement('a');
     imgLink.href = entry.path;
@@ -73,20 +73,20 @@ function buildCard(entry) {
 
   // body cell — title link + description
   const body = document.createElement('div');
-  body.className = 'cards-article-card-body';
+  body.className = 'cards-card-body';
 
   const titleP = document.createElement('p');
   const titleLink = document.createElement('a');
   titleLink.href = entry.path;
   titleLink.title = entry.title || '';
-  titleLink.className = 'cards-article-card-title';
+  titleLink.className = 'cards-card-title';
   titleLink.textContent = entry.title || '';
   titleP.append(titleLink);
   body.append(titleP);
 
   if (entry.description) {
     const description = document.createElement('p');
-    description.className = 'cards-article-card-description';
+    description.className = 'cards-card-description';
     description.textContent = entry.description;
     body.append(description);
   }
@@ -98,14 +98,14 @@ function buildCard(entry) {
 /**
  * Loads and decorates the magazine-list block.
  * Queries all published, indexed pages under /magazine and renders them as a
- * card grid that is visually identical to the hardcoded cards-article block.
+ * card grid that is visually identical to the cards "article" variant.
  * @param {Element} block The magazine-list block element
  */
 export default async function decorate(block) {
   block.textContent = '';
 
-  // reuse the cards-article styling so both card grids look identical
-  loadCSS(`${window.hlx.codeBasePath}/blocks/cards-article/cards-article.css`);
+  // reuse the cards "article" variant styling so both card grids look identical
+  loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards.css`);
 
   const magazineRoot = getMagazineRoot();
   let entries = [];
@@ -131,10 +131,10 @@ export default async function decorate(block) {
     return;
   }
 
-  // Render inside a `.cards-article` wrapper so cards-article.css applies and
-  // the output is pixel-identical to the hardcoded cards.
+  // Render inside a `.cards.article` wrapper so the cards "article" variant CSS
+  // applies and the output is pixel-identical to the authored cards.
   const cards = document.createElement('div');
-  cards.className = 'cards-article';
+  cards.className = 'cards article';
   const ul = document.createElement('ul');
   entries.forEach((entry) => ul.append(buildCard(entry)));
   cards.append(ul);

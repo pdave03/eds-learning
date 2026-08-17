@@ -42,6 +42,6 @@ export default function parse(element, { document }) {
   // Row 2: image below (single column). Only add if present.
   if (img) cells.push([img]);
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'columns-imgbottom', cells });
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Columns (imgbottom)', cells });
   element.replaceWith(block);
 }

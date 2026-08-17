@@ -14,20 +14,20 @@
   --social-media-radius: 4px;
 
   /* dark variant defaults: black band, white icons */
-  --social-media-band-bg: #202020;
-  --social-media-color: #fff;
-  --social-media-hover-bg: #ffea00;
-  --social-media-hover-color: #202020;
+  --social-media-band-bg: var(--brand-ink);
+  --social-media-color: var(--brand-white);
+  --social-media-hover-bg: var(--brand-accent);
+  --social-media-hover-color: var(--brand-ink);
 }
 
 /* light variant: white band, black icons */
 .social-media-light.social-media,
 .social-media-light.social-media-list,
 .social-media-light .social-media-list {
-  --social-media-band-bg: #fff;
-  --social-media-color: #202020;
-  --social-media-hover-bg: #ffea00;
-  --social-media-hover-color: #202020;
+  --social-media-band-bg: var(--brand-white);
+  --social-media-color: var(--brand-ink);
+  --social-media-hover-bg: var(--brand-accent);
+  --social-media-hover-color: var(--brand-ink);
 }
 
 /* the list itself is the band: one rounded rectangle holding the icons */
@@ -62,11 +62,28 @@ ul.social-media-list li {
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.social-media-list a.social-media-link svg {
+/* The icon span (from the EDS icon pattern) is recoloured with a CSS mask so a
+   single monochrome SVG works in every variant (white on dark, ink on light,
+   ink on the yellow hover). The underlying <img> is masked, not shown directly. */
+.social-media-list a.social-media-link .icon {
+  display: block;
   width: var(--social-media-icon);
   height: var(--social-media-icon);
-  fill: currentcolor;
-  display: block;
+  background-color: currentcolor;
+  mask: var(--social-media-icon-src) center / contain no-repeat;
+}
+
+.social-media-list a.social-media-link .icon-facebook { --social-media-icon-src: url('/icons/facebook.svg'); }
+.social-media-list a.social-media-link .icon-twitter { --social-media-icon-src: url('/icons/twitter.svg'); }
+.social-media-list a.social-media-link .icon-instagram { --social-media-icon-src: url('/icons/instagram.svg'); }
+.social-media-list a.social-media-link .icon-youtube { --social-media-icon-src: url('/icons/youtube.svg'); }
+.social-media-list a.social-media-link .icon-linkedin { --social-media-icon-src: url('/icons/linkedin.svg'); }
+.social-media-list a.social-media-link .icon-pinterest { --social-media-icon-src: url('/icons/pinterest.svg'); }
+.social-media-list a.social-media-link .icon-tiktok { --social-media-icon-src: url('/icons/tiktok.svg'); }
+.social-media-list a.social-media-link .icon-social-link { --social-media-icon-src: url('/icons/social-link.svg'); }
+
+.social-media-list a.social-media-link .icon img {
+  display: none;
 }
 
 .social-media-list a.social-media-link:hover,

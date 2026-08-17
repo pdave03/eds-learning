@@ -1,4 +1,4 @@
-/* magazine-list renders its cards using the cards-article markup + styling
+/* magazine-list renders its cards using the the cards "article" variant markup + styling
    (loaded at runtime), so the dynamic grid matches the hardcoded cards exactly.
    Only the empty-state message is styled here. */
 .magazine-list-empty {

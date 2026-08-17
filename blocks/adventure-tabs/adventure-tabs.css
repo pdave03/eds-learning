@@ -1,4 +1,4 @@
-/* Adventure Tabs — filter bar + card grid (cards reuse cards-article styling).
+/* Adventure Tabs — filter bar + card grid (cards reuse the cards "article" variant styling).
    The tab bar is a centered row of type buttons; the active tab gets a yellow
    underline (matching the WKND magazine/nav accent). */
 .adventure-tabs .adventure-tabs-tablist {
@@ -29,15 +29,15 @@
 }
 
 .adventure-tabs .adventure-tabs-tab:hover {
-  color: #202020;
+  color: var(--brand-ink);
 }
 
 .adventure-tabs .adventure-tabs-tab-active {
-  color: #202020;
-  border-bottom-color: #ffea00;
+  color: var(--brand-ink);
+  border-bottom-color: var(--brand-accent);
 }
 
 /* hidden cards (filtered out) */
-.adventure-tabs .cards-article ul > li[hidden] {
+.adventure-tabs .cards.article ul > li[hidden] {
   display: none;
 }

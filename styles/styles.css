@@ -19,6 +19,13 @@
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
 
+  /* WKND brand palette — re-skin the whole site by editing these */
+  --brand-ink: #202020; /* near-black text / dark bands */
+  --brand-white: #fff;
+  --brand-black: #000;
+  --brand-accent: #ffea00; /* WKND yellow */
+  --brand-accent-hover: #e6d200; /* darker yellow for hover */
+
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
@@ -322,8 +329,8 @@ main .default-content-wrapper p:not(.button-wrapper) > a:only-child {
   padding: 14px 35px;
   border: 0;
   border-radius: 0;
-  background-color: #ffea00;
-  color: #202020;
+  background-color: var(--brand-accent);
+  color: var(--brand-ink);
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -335,8 +342,8 @@ main .default-content-wrapper p:not(.button-wrapper) > a:only-child {
 
 main .default-content-wrapper p:not(.button-wrapper) > a:only-child:hover,
 main .default-content-wrapper p:not(.button-wrapper) > a:only-child:focus-visible {
-  background-color: #e6d200;
-  color: #202020;
+  background-color: var(--brand-accent-hover);
+  color: var(--brand-ink);
 }
 
 main img {
@@ -440,12 +447,12 @@ main .breadcrumb li {
   align-items: center;
   margin: 0;
   font-weight: 700;
-  color: #202020;
+  color: var(--brand-ink);
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
 main .breadcrumb li a:any-link {
-  color: #202020;
+  color: var(--brand-ink);
   text-decoration: none;
 }
 
@@ -463,7 +470,7 @@ main .breadcrumb li:not(:first-child)::before {
   margin-right: 12px;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-left: 7px solid #ffea00;
+  border-left: 7px solid var(--brand-accent);
 }
 
 /* current page (last crumb, no link) is regular weight */
@@ -488,7 +495,7 @@ main .article-layout .article-aside-heading {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #202020;
+  color: var(--brand-ink);
 }
 
 /* related-articles list as a vertical list of link + date, with a left rule */
@@ -521,7 +528,7 @@ main .article-aside a.cards-article-card-title {
   font-weight: 600;
   line-height: 1.3;
   text-transform: uppercase;
-  color: #202020;
+  color: var(--brand-ink);
   text-decoration: none;
 }
 
@@ -600,7 +607,7 @@ main .faqs-aside p {
 
 /* stylelint-disable-next-line no-descending-specificity */
 main .faqs-aside p a:any-link {
-  color: #202020;
+  color: var(--brand-ink);
   text-decoration: underline;
 }
 

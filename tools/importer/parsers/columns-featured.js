@@ -42,6 +42,6 @@ export default function parse(element, { document }) {
   // One content row, two columns: image | text (image on the left).
   const cells = [[img || '', textCell.length ? textCell : '']];
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'columns-featured', cells });
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Columns (featured)', cells });
   element.replaceWith(block);
 }
