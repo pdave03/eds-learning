@@ -117,6 +117,7 @@
   .columns.featured > div {
     flex-direction: row;
     align-items: stretch;
+    gap: 0; /* image sits flush against the grey content panel (no gap) */
   }
 
   /* image takes the larger share (~62%) */
