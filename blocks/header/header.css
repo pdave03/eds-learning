@@ -76,7 +76,7 @@ header nav[aria-expanded='true'] .nav-utility .default-content-wrapper {
 }
 
 header nav .nav-utility a:any-link {
-  color: #202020;
+  color: var(--brand-ink);
   font-size: 14px;
   text-transform: uppercase;
 }
@@ -94,7 +94,7 @@ header nav .nav-locale-toggle {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #202020;
+  color: var(--brand-ink);
   font: inherit;
   font-size: 14px;
   text-transform: uppercase;
@@ -130,7 +130,7 @@ header nav .nav-locale[aria-expanded='true'] .nav-locale-list {
 header nav .nav-locale-list > li {
   font-weight: 600;
   padding: 6px 0 2px;
-  color: #202020;
+  color: var(--brand-ink);
 }
 
 header nav .nav-locale-list > li > ul {
@@ -166,7 +166,7 @@ header nav .nav-hamburger button {
   border-radius: 0;
   padding: 0;
   background-color: transparent;
-  color: #202020;
+  color: var(--brand-ink);
   cursor: pointer;
 }
 
@@ -271,7 +271,7 @@ header nav .nav-sections ul > li > a {
 }
 
 header nav .nav-sections a:any-link {
-  color: #202020;
+  color: var(--brand-ink);
 }
 
 header nav .nav-sections a:hover {
@@ -281,8 +281,8 @@ header nav .nav-sections a:hover {
 
 /* active page: yellow highlight on the matching top-level link */
 header nav .nav-sections li.nav-active > a:any-link {
-  background-color: #ffea00;
-  color: #202020;
+  background-color: var(--brand-accent);
+  color: var(--brand-ink);
 }
 
 header nav .nav-sections li.nav-active > a:hover {
@@ -326,13 +326,13 @@ header nav .nav-search input {
   padding: 0 12px 0 34px;
   border: 0;
   background-color: rgb(235 235 235 / 54%);
-  color: #202020;
+  color: var(--brand-ink);
   font-size: 12px;
   text-transform: uppercase;
 }
 
 header nav .nav-search input::placeholder {
-  color: #202020;
+  color: var(--brand-ink);
   opacity: 0.7;
 }
 
@@ -350,7 +350,7 @@ header nav .nav-search input::placeholder {
     left: 0;
     right: 0;
     height: 40px;
-    background-color: #202020;
+    background-color: var(--brand-ink);
     z-index: 0;
     transition: height 0.3s ease;
   }
@@ -411,7 +411,7 @@ header nav .nav-search input::placeholder {
     right: 0;
     min-width: 220px;
     padding: 16px;
-    background-color: #202020;
+    background-color: var(--brand-ink);
     z-index: 5;
     box-shadow: 0 4px 12px rgb(0 0 0 / 30%);
   }

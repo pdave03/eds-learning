@@ -49,6 +49,6 @@ export default function parse(element, { document }) {
   // Cards convention: one row per card — [ image | text ].
   const cells = [[img || '', textCell.length ? textCell : '']];
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'cards-member', cells });
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Cards (member)', cells });
   element.replaceWith(block);
 }

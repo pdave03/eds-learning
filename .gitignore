@@ -14,3 +14,7 @@ helix-importer-ui
 migration-work/navigation-validation/
 migration-work/footer-validation/
 .da-upload/
+
+# Importer output — generated locally, not source
+tools/importer/reports/
+tools/importer/*.bundle.js

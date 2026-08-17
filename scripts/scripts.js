@@ -177,9 +177,9 @@ function decorateBreadcrumb(main) {
  * @param {Element} main The main container element
  */
 function decorateArticleLayout(main) {
-  const section = main.querySelector('.section.article-body-container.cards-article-container');
+  const section = main.querySelector('.section.article-body-container.cards-container');
   if (!section || section.querySelector(':scope > .article-layout')) return;
-  const aside = section.querySelector(':scope > .cards-article-wrapper');
+  const aside = section.querySelector(':scope > .cards-wrapper');
   if (!aside) return;
 
   const layout = document.createElement('div');

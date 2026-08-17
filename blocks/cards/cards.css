@@ -1,3 +1,4 @@
+/* ---------- Base cards ---------- */
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -24,4 +25,276 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+/* ============================================================
+   Variant: article  (class="cards article")
+   WKND Recent Articles / Adventures cards — borderless 4-up grid.
+   ============================================================ */
+
+/* Section heading above the cards ("Recent Articles" / "Next Adventures")
+   gets a short yellow underline, matching the WKND source. */
+.section:has(.cards.article) .default-content-wrapper h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  color: var(--brand-ink);
+  text-transform: none;
+}
+
+.section:has(.cards.article) .default-content-wrapper h2::after {
+  content: '';
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid var(--brand-accent);
+}
+
+.cards.article > ul {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.cards.article > ul > li {
+  border: 0;
+  background-color: transparent;
+}
+
+.cards.article .cards-card-image a,
+.cards.article .cards-card-image picture {
+  display: block;
+}
+
+.cards.article > ul > li img {
+  aspect-ratio: 765 / 535;
+}
+
+.cards.article .cards-card-body {
+  margin: 16px 0 0;
+}
+
+/* card title — uppercase, bold */
+.cards.article .cards-card-title {
+  display: block;
+  color: var(--brand-ink);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.cards.article .cards-card-title:hover,
+.cards.article .cards-card-title:focus-visible {
+  text-decoration: underline;
+}
+
+/* description — gray, truncated to two lines with ellipsis */
+.cards.article .cards-card-description {
+  margin: 8px 0 0;
+  color: #696969;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* ============================================================
+   Variant: member  (class="cards member")
+   WKND Members Only cards — 2-up grid, locked with a yellow ribbon,
+   text content, a gray "Read More" button, and the image below.
+   Each members-only teaser is its own block, so they arrive as sibling
+   .cards-wrapper elements in the section.
+   ============================================================ */
+
+/* "Members Only" heading — short yellow underline, matching "All Articles". */
+/* stylelint-disable-next-line no-descending-specificity */
+.section.cards-container .default-content-wrapper h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  color: var(--brand-ink);
+  text-transform: none;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.section.cards-container .default-content-wrapper h2::after {
+  content: '';
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid var(--brand-accent);
+}
+
+/* Center the whole Members Only section content in the standard content column
+   so the cards align to the same left edge as the heading. */
+main > .section.cards-container:has(.cards.member) {
+  box-sizing: border-box;
+  max-width: 1264px; /* 1200 content + 2 x 32 side padding */
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+main > .section.cards-container:has(.cards.member) > div {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+/* Grey partition line after the "Sign in…" intro paragraph. */
+.section.cards-container:has(.cards.member) .default-content-wrapper {
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+/* No pre-footer partition line after this section. */
+main > .section.cards-container:has(.cards.member)::after {
+  content: none;
+}
+
+/* Locked cards are greyed out (member not signed in). */
+.cards.member .cards-member-body > *,
+.cards.member .cards-member-image {
+  opacity: 0.5;
+  filter: grayscale(80%);
+}
+
+/* Two fixed-size cards side by side on wider screens; stacked below. */
+@media (width >= 900px) {
+  main > .section.cards-container:has(.cards.member)
+    > .default-content-wrapper ~ .cards-wrapper {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 350px;
+    max-width: 100%;
+    min-height: 250px;
+    vertical-align: top;
+  }
+
+  main > .section.cards-container:has(.cards.member)
+    > .cards-wrapper:not(:last-of-type) {
+    margin-right: 24px;
+  }
+}
+
+.cards.member > ul {
+  grid-template-columns: 1fr;
+  gap: 40px 24px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.cards.member > ul > li {
+  position: relative;
+  border: 0;
+  background-color: transparent;
+}
+
+/* ---------- Lock ribbon (yellow corner + padlock) ---------- */
+.cards.member > ul > li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 44px solid var(--brand-accent);
+  border-right: 44px solid transparent;
+  z-index: 1;
+}
+
+/* padlock body drawn in CSS (reliable across fonts) */
+.cards.member > ul > li::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 6px;
+  width: 11px;
+  height: 8px;
+  box-sizing: border-box;
+  border: 2px solid var(--brand-ink);
+  border-radius: 0 0 2px 2px;
+  z-index: 2;
+}
+
+/* padlock shackle */
+.cards.member .cards-member-body::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 8.5px;
+  width: 6px;
+  height: 6px;
+  box-sizing: border-box;
+  border: 2px solid var(--brand-ink);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  z-index: 2;
+}
+
+/* ---------- Body (title, description, CTA) ---------- */
+.cards.member .cards-member-body {
+  padding-left: 34px; /* clear the lock ribbon */
+}
+
+/* stylelint-disable no-descending-specificity */
+.cards.member .cards-member-body h1,
+.cards.member .cards-member-body h2,
+.cards.member .cards-member-body h3 {
+  margin: 0 0 8px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--brand-ink);
+}
+/* stylelint-enable no-descending-specificity */
+
+.cards.member .cards-member-body p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #696969;
+}
+
+/* gray "Read More" button — linked CTA and static gated text look identical. */
+.cards.member .cards-member-cta:any-link,
+.cards.member p.cards-member-cta-static {
+  display: inline-block;
+  width: auto;
+  margin: 0;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 0;
+  background-color: #ebebeb;
+  color: #696969;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cards.member .cards-member-cta:hover,
+.cards.member .cards-member-cta:focus-visible {
+  background-color: #dcdcdc;
+  color: var(--brand-ink);
+}
+
+/* ---------- Image below ---------- */
+.cards.member .cards-member-image {
+  margin-top: 24px;
+  line-height: 0;
+}
+
+.cards.member .cards-member-image img {
+  width: 100%;
+  aspect-ratio: 360 / 200;
+  object-fit: cover;
+  display: block;
 }

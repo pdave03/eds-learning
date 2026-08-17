@@ -7,14 +7,14 @@ import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
  *   | <type> | <image> | <title link> + <description> |
  * where <type> is the adventure category (e.g. Climbing, Surfing). The block
  * builds a tab bar from the distinct types (with a leading "All"), renders the
- * cards as a grid (reusing cards-article styling), and shows only the selected
+ * cards as a grid (reusing the cards "article" variant styling), and shows only the selected
  * type's cards when a tab is clicked ("All" shows everything).
  *
  * @param {Element} block The block element
  */
 export default function decorate(block) {
-  // reuse cards-article card styling for identical card look
-  loadCSS(`${window.hlx.codeBasePath}/blocks/cards-article/cards-article.css`);
+  // reuse the cards "article" variant styling for an identical card look
+  loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards.css`);
 
   // 1. Parse rows into { type, image, body } card descriptors, in order.
   const cards = [];
@@ -36,25 +36,25 @@ export default function decorate(block) {
   cards.forEach((c) => { if (c.type && !types.includes(c.type)) types.push(c.type); });
   const allLabel = 'All';
 
-  // 3. Build the card grid (cards-article markup) with a data-type per card.
+  // 3. Build the card grid (cards "article" variant markup) with a data-type per card.
   const grid = document.createElement('div');
-  grid.className = 'cards-article';
+  grid.className = 'cards article';
   const ul = document.createElement('ul');
   cards.forEach((c) => {
     const li = document.createElement('li');
     li.dataset.type = c.type;
 
     if (c.imageCell) {
-      c.imageCell.className = 'cards-article-card-image';
+      c.imageCell.className = 'cards-card-image';
       li.append(c.imageCell);
     }
     if (c.bodyCell) {
-      c.bodyCell.className = 'cards-article-card-body';
+      c.bodyCell.className = 'cards-card-body';
       const titleLink = c.bodyCell.querySelector('a');
-      if (titleLink) titleLink.classList.add('cards-article-card-title');
+      if (titleLink) titleLink.classList.add('cards-card-title');
       // wrap any text after the title link as the description
       const desc = document.createElement('p');
-      desc.className = 'cards-article-card-description';
+      desc.className = 'cards-card-description';
       let node = titleLink ? titleLink.nextSibling : c.bodyCell.firstChild;
       while (node) {
         const next = node.nextSibling;
